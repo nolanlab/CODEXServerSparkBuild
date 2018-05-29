@@ -1,0 +1,1244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="CODEXServer_Spark_rebuild:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f4835879-e7d4-4492-8c6e-b15c94875de8" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/Uploader/target/" />
+    <ignored path="$PROJECT_DIR$/Uploader2/target/" />
+    <ignored path="$PROJECT_DIR$/codexviewer/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="MakeMontage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/driffta/MakeMontage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-504">
+              <caret line="60" column="17" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GateCanvas.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/GateCanvas.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1607">
+              <caret line="585" column="38" lean-forward="true" selection-start-line="585" selection-start-column="38" selection-end-line="585" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="start_server.bat" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/out/artifacts/CODEXServer_Spark_rebuild_jar/start_server.bat">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="uploaderconfig.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/out/artifacts/Uploader_jar/uploaderconfig.json">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="frmMain.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/frmMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="331">
+              <caret line="573" column="49" lean-forward="true" selection-start-line="573" selection-start-column="49" selection-end-line="573" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GateClient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/GateClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="12231">
+              <caret line="1568" column="65" selection-start-line="1568" selection-start-column="65" selection-end-line="1568" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Gate.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/gate/Gate.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="246">
+              <caret line="89" column="33" selection-start-line="89" selection-start-column="33" selection-end-line="89" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BestFocusHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/utils/codexhelper/BestFocusHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="535">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>init</find>
+      <find>Microscope mic</find>
+      <find>Microscope micro</find>
+      <find>ItemLi</find>
+      <find>microscopeType</find>
+      <find>Experiment</find>
+      <find>serverC</find>
+      <find>user.home</find>
+      <find>serverName</find>
+      <find>server</find>
+      <find>ExperimentVi</find>
+      <find>load(</find>
+      <find>loadFromJ</find>
+      <find>File f</find>
+      <find>localhost</find>
+      <find>Type</find>
+      <find>reflect</find>
+      <find>val1.getText</find>
+      <find>con</find>
+      <find>config.load</find>
+      <find>invert</find>
+      <find>clustcols</find>
+      <find>data</find>
+      <find>user.dir</find>
+      <find>compens</find>
+      <find>System.getProperty(&quot;user.dir&quot;)</find>
+      <find>heigh</find>
+      <find>System.getProperty</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>RscController.</replace>
+      <replace>RscController.getServerHomeDir()</replace>
+      <replace>RscCodexController.getServerHomeDir()</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>C:\Users\Nikolay\IdeaProjects\CODEXServer_Spark_rebuild</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/ClientTest.java" />
+        <option value="$PROJECT_DIR$/Uploader/src/uploader/uplclient/frmMain.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/utils/microscope/Microscope.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/utils/microscope/Keyence.java" />
+        <option value="$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/microscope/Keyence.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/utils/codexhelper/ExperimentHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/utils/codexhelper/MicroscopeTypeEnum.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/driffta/Experiment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/RunSegm.java" />
+        <option value="$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/ExperimentView.java" />
+        <option value="$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/ServerConfig.java" />
+        <option value="$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/ChooseServer.java" />
+        <option value="$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/frmMain.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/Segmentation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/MahalonobisDistance.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/gating/gatingserver/GatingConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/controller/RscCodexController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/MakeFCS.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/driffta/Driffta.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/utils/codexhelper/GatingHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/clustering/clsserver/RunClustering.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/clustering/clsserver/ClusterConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/public/html/clustering.html" />
+        <option value="$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/i5d/RemoteImageStack.java" />
+        <option value="$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/CODEX_Viewer.java" />
+        <option value="$PROJECT_DIR$/Uploader/pom.xml" />
+        <option value="$PROJECT_DIR$/codexviewer/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/driffta/SimpleImageInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/utils/TileObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/driffta/MakeMontage.java" />
+        <option value="$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/ClientTest.java" />
+        <option value="$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/ExperimentWrapper.java" />
+        <option value="$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/i5d/CODEXImageOpener.java" />
+        <option value="$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/i5d/MultiCompositeImage.java" />
+        <option value="$PROJECT_DIR$/codexviewer/src/main/java/org/cytobank/applets/gating/GateApplet.java" />
+        <option value="$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/gate/Gate.java" />
+        <option value="$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/i5d/GateClient.java" />
+        <option value="$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/GateCanvas.java" />
+        <option value="$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/GateClient.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="462" />
+    <option name="y" value="208" />
+    <option name="width" value="1938" />
+    <option name="height" value="1098" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <autoscrollFromSource ProjectPane="true" />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="codexviewer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="codexviewer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="codexviewer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="codexviewer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="codexviewer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="viewerclient" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="CODEXServer_Spark_rebuild_jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="Uploader_jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="CODEX" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="CODEX" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="CODEX" type="462c0819:PsiDirectoryNode" />
+              <item name="segm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="CODEX" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="Uploader" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="Uploader" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="Uploader" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="Uploader" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CODEXServer_Spark_rebuild" type="462c0819:PsiDirectoryNode" />
+              <item name="Uploader" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="uplclient" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="lang" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: net.imagej:ij:1.51g" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: net.imagej:ij:1.51g" type="70bed36:NamedLibraryElementNode" />
+              <item name="ij-1.51g.jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: net.imagej:ij:1.51g" type="70bed36:NamedLibraryElementNode" />
+              <item name="ij-1.51g.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="ij" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: net.imagej:ij:1.51g" type="70bed36:NamedLibraryElementNode" />
+              <item name="ij-1.51g.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="ij" type="462c0819:PsiDirectoryNode" />
+              <item name="plugin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CODEXServer_Spark_rebuild" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Maven: net.imagej:ij:1.51g" type="70bed36:NamedLibraryElementNode" />
+              <item name="ij-1.51g.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="ij" type="462c0819:PsiDirectoryNode" />
+              <item name="process" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.27931035" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Nikolay\IdeaProjects\CODEXServer_Spark_rebuild\codexviewer\src\main\java\org\nolanlab\CODEX\viewer\viewerclient\i5d" />
+      <recent name="C:\Users\Nikolay\IdeaProjects\CODEXServer_Spark_rebuild\codexviewer\src\main\java\org\nolanlab\CODEX\viewer\viewerclient" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Nikolay\IdeaProjects\CODEXServer_Spark_rebuild\codexviewer\src\main\java" />
+      <recent name="C:\Users\Nikolay\IdeaProjects\CODEXServer_Spark_rebuild\codexviewer\src\main\java\org\nolanlab\CODEX\viewer\viewerclient" />
+      <recent name="C:\Users\Nikolay\IdeaProjects\CODEXServer_Spark_rebuild\codexviewer\src\main\java\org\nolanlab\CODEX\viewer\viewerclient\i5d" />
+      <recent name="C:\Users\Nikolay\IdeaProjects\CODEXServer_Spark_rebuild\codexviewer" />
+      <recent name="C:\Users\Nikolay\IdeaProjects\CODEXServer_Spark_rebuild\Uploader\src\main\java\uploader\uplclient" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.ClientTest">
+    <configuration name="ClientTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.nolanlab.CODEX.viewer.viewerclient.ClientTest" />
+      <module name="CODEXViewer_" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.nolanlab.CODEX.viewer.viewerclient.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.nolanlab.CODEX.controller.RscCodexController" />
+      <module name="CODEXServer_Spark_rebuild" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;F:\CODEX_server_home&quot;" />
+      <option name="VM_PARAMETERS" value="-Xmx16G" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="UploaderClient" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="uploader.uplclient.frmMain" />
+      <module name="Uploader" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="clustering.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/CODEXServer_Spark_rebuild/public/html/clustering.html" />
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="Application.UploaderClient" />
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.ClientTest" />
+      <item itemvalue="JavaScript Debug.clustering.html" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ClientTest" />
+        <item itemvalue="JavaScript Debug.clustering.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f4835879-e7d4-4492-8c6e-b15c94875de8" name="Default" comment="" />
+      <created>1527277153985</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1527277153985</updated>
+      <workItem from="1527277158915" duration="62489000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="62489000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="2062" height="1126" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" sideWeight="0.48535156" weight="0.32971373" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info id="Image Layers" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="bottom" id="Event Log" sideWeight="0.51220703" side_tool="true" visible="true" weight="0.22309971" />
+      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48779297" weight="0.22309971" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info id="Capture Tool" />
+      <window_info id="Designer" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49951172" weight="0.32971373" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4951172" weight="0.33464956" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/UploaderClient.java</url>
+          <line>13</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/frmMain.java</url>
+          <line>374</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/frmMain.java</url>
+          <line>371</line>
+          <properties />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/RunSegm.java</url>
+          <line>27</line>
+          <properties />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/RunSegm.java</url>
+          <line>28</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/RunSegm.java</url>
+          <line>29</line>
+          <properties />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/gating/gatingserver/GatingConfiguration.java</url>
+          <line>89</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="53" />
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>experimentWrapper.getMontageFolder(region).getAbsolutePath()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>new File(getTilesBaseFolder().getAbsolutePath() + File.separator+String.format(&quot;reg%03d&quot;,reg))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CODEXServer_Spark_rebuild.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="89" lean-forward="true" selection-start-line="28" selection-start-column="89" selection-end-line="28" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Uploader/src/main/java/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/driffta/Experiment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="59" column="44" lean-forward="true" selection-start-line="59" selection-start-column="44" selection-end-line="59" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#9930#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#9887#9888#0" expanded="true" />
+            <element signature="e#9925#9926#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/utils/codexhelper/ExperimentHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="70" column="19" lean-forward="true" selection-start-line="67" selection-start-column="8" selection-end-line="70" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/UploaderClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/ChooseServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#92#93#0" expanded="true" />
+            <element signature="e#125#126#0" expanded="true" />
+            <element signature="e#177#178#0" expanded="true" />
+            <element signature="e#221#222#0" expanded="true" />
+            <element signature="e#269#270#0" expanded="true" />
+            <element signature="e#305#306#0" expanded="true" />
+            <element signature="e#371#372#0" expanded="true" />
+            <element signature="e#421#422#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/ServerConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+          <folding>
+            <element signature="e#400#401#0" expanded="true" />
+            <element signature="e#425#426#0" expanded="true" />
+            <element signature="e#461#462#0" expanded="true" />
+            <element signature="e#489#490#0" expanded="true" />
+            <element signature="e#529#530#0" expanded="true" />
+            <element signature="e#565#566#0" expanded="true" />
+            <element signature="e#623#624#0" expanded="true" />
+            <element signature="e#673#674#0" expanded="true" />
+            <element signature="e#703#704#0" expanded="true" />
+            <element signature="e#732#733#0" expanded="true" />
+            <element signature="e#773#774#0" expanded="true" />
+            <element signature="e#809#810#0" expanded="true" />
+            <element signature="e#839#840#0" expanded="true" />
+            <element signature="e#868#869#0" expanded="true" />
+            <element signature="e#909#910#0" expanded="true" />
+            <element signature="e#945#946#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/MaximaFinder3D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="49" column="7" selection-start-line="49" selection-start-column="7" selection-end-line="49" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/net/sourceforge/parallelcolt/parallelcolt/0.10.0/parallelcolt-0.10.0.jar!/cern/colt/matrix/tdouble/impl/DenseDoubleMatrix2D.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/MahalonobisDistance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/RunSegm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="27" column="36" selection-start-line="27" selection-start-column="36" selection-end-line="27" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmclient/SegConfigParam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="e#994#995#0" expanded="true" />
+            <element signature="e#1024#1025#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/Arrays.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="3799" selection-start-line="3799" selection-end-line="3799" />
+          <folding>
+            <element signature="e#177054#177055#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/gating/gatingserver/GatingConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-131">
+          <caret line="117" column="70" selection-start-line="117" selection-start-column="70" selection-end-line="117" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/controller/RscCodexController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="110" column="55" lean-forward="true" selection-start-line="110" selection-start-column="55" selection-end-line="110" selection-end-column="55" />
+          <folding>
+            <element signature="e#1372#1373#0" expanded="true" />
+            <element signature="e#1430#1431#0" expanded="true" />
+            <element signature="e#1477#1478#0" expanded="true" />
+            <element signature="e#1513#1514#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/Segmentation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/segm/segmserver/MakeFCS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="146" column="45" selection-start-line="146" selection-start-column="45" selection-end-line="146" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/driffta/Driffta.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="47" column="48" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/utils/codexhelper/GatingHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/clustering/clsserver/RunClustering.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="43" column="27" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/clustering/clsserver/ClusterConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="46" column="48" selection-start-line="46" selection-start-column="48" selection-end-line="46" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/public/html/gate.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/public/html/clustering.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="134" column="41" selection-start-line="134" selection-start-column="41" selection-end-line="134" selection-end-column="41" />
+          <folding>
+            <element signature="n#style#0;n#select#0;n#div#5;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/i5d/RemoteImageStack.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1273">
+          <caret line="41" column="9" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/NumberFormatException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="579" selection-start-line="579" selection-end-line="579" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/ExperimentView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="2220" selection-start-line="2220" selection-end-line="2220" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Uploader/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="35" selection-start-line="35" selection-end-line="50" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/net/imagej/ij/1.51g/ij-1.51g.jar!/ij/process/ImageProcessor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="1608" column="16" selection-start-line="1608" selection-start-column="16" selection-end-line="1608" selection-end-column="16" />
+          <folding>
+            <element signature="e#50509#50510#0" expanded="true" />
+            <element signature="e#50557#50558#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/driffta/SimpleImageInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1255#1279#0" expanded="true" />
+            <element signature="e#5204#5205#0" expanded="true" />
+            <element signature="e#5233#5234#0" expanded="true" />
+            <element signature="e#5274#5275#0" expanded="true" />
+            <element signature="e#5310#5311#0" expanded="true" />
+            <element signature="e#5339#5340#0" expanded="true" />
+            <element signature="e#5367#5368#0" expanded="true" />
+            <element signature="e#5406#5407#0" expanded="true" />
+            <element signature="e#5440#5441#0" expanded="true" />
+            <element signature="e#5475#5476#0" expanded="true" />
+            <element signature="e#5506#5507#0" expanded="true" />
+            <element signature="e#5554#5555#0" expanded="true" />
+            <element signature="e#5594#5595#0" expanded="true" />
+            <element signature="e#5640#5641#0" expanded="true" />
+            <element signature="e#5738#5739#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/utils/TileObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="48" column="28" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/net/imagej/ij/1.51g/ij-1.51g.jar!/ij/plugin/MontageMaker.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-783">
+          <caret line="213" column="12" selection-start-line="213" selection-start-column="12" selection-end-line="213" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/utils/codexhelper/BestFocusHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/CODEXViewer_.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/CODEX_Viewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/ExperimentWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="26" column="73" selection-start-line="26" selection-start-column="73" selection-end-line="26" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#264#265#0" expanded="true" />
+            <element signature="e#291#292#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/ClientTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="68" column="47" selection-start-line="68" selection-start-column="47" selection-end-line="68" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/i5d/CODEXImageOpener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="55" column="33" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#435#436#0" expanded="true" />
+            <element signature="e#492#493#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/i5d/MultiCompositeImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/cytobank/applets/gating/CompensationApplet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/cytobank/applets/gating/GateApplet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="218" column="10" lean-forward="true" selection-start-line="218" selection-start-column="10" selection-end-line="218" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/nolanlab/CODEX/driffta/MakeMontage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-504">
+          <caret line="60" column="17" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/gate/Gate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="89" column="33" selection-start-line="89" selection-start-column="33" selection-end-line="89" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/GateClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12231">
+          <caret line="1568" column="65" selection-start-line="1568" selection-start-column="65" selection-end-line="1568" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codexviewer/src/main/java/org/nolanlab/CODEX/viewer/viewerclient/GateCanvas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1607">
+          <caret line="585" column="38" lean-forward="true" selection-start-line="585" selection-start-column="38" selection-end-line="585" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/artifacts/CODEXServer_Spark_rebuild_jar/start_server.bat">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/artifacts/Uploader_jar/uploaderconfig.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Uploader/src/main/java/uploader/uplclient/frmMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="573" column="49" lean-forward="true" selection-start-line="573" selection-start-column="49" selection-end-line="573" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>Uploader:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.27931035" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.23448277" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>CODEXViewer_</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.27931035" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: colt:colt:1.2.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.27931035" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

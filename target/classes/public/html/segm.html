@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Segmentation</title>
+    <link rel="shortcut icon" href="/images/codexlogo.ico" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/sidepanel.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav id="sidebar" class="active">
+            <div class="sidebar-header">
+                <h3>Codex pipeline</h3>
+                <strong>Codex</strong>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="/html/home.html">
+                        <i class="glyphicon glyphicon-home"></i>
+                        Home
+                    </a>
+
+                    <a href="/html/uploader.html">
+                        <i class="glyphicon glyphicon-level-up"></i>
+                        Uploader
+                    </a>
+                </li>
+
+                <li class="active">
+                    <a href="/html/segm.html">
+                        <i class="glyphicon glyphicon-th"></i>
+                        Segmentation
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/html/gate.html">
+                        <i class="glyphicon glyphicon-filter"></i>
+                        Gating
+                    </a>
+
+                    <a href="/html/clustering.html">
+                        <i class="glyphicon glyphicon-equalizer"></i>
+                        Clustering
+                    </a>
+
+                    <a href="#">
+                        <i class="glyphicon glyphicon-play-circle"></i>
+                        Viewer
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="content">
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" style="background-color: #337ab7">
+                            <i class="glyphicon glyphicon-align-left"></i>
+                            <span>Menu</span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/html/faq.html">FAQ</a> </li>
+                            <li><a href="/html/contact.html">Contact</a></li>
+                            <li><a href="/html/about.html">About us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <h2>Segmentation</h2>
+            <p>Choose the experiment folder for a user and specify the parameters given below to proceed with segmentation. Make sure that the
+                experiment was processed and uploaded to the server before starting.
+            </p>
+
+            <div class="container-fluid" style="width:600px;">
+                <!--<h2 align="center">Segmentation</h2><br />-->
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><i>Segmentation configuration parameters</i></div>
+                    <div class="panel-body">
+
+                            <div class="form-group">
+                                <label for="userVal">Select User:</label>
+                                <select name="userVal" id="userVal" class="form-control input" placeholder="Choose user" required autofocus>
+                                    <option value="">Choose user</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="expVal">Enter experiment name:</label>
+                                <select name="expVal" id="expVal" class="form-control input" placeholder="Choose experiment" required autofocus>
+                                    <option value="">Choose experiment</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="radiusVal">Radius:</label>
+                                <input type="number" class="form-control" ng-model="radiusVal" value="5" id="radiusVal" placeholder="Enter radius" name="radiusVal" required autofocus>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="maxCutOffVal">Max Cutoff:</label>
+                                <input type="number" class="form-control" ng-model="maxCutOffVal" value="0.99" step="0.01" id="maxCutOffVal" placeholder="Enter Max CutOff" name="maxCutOffVal" required autofocus>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="minCutOffVal">Min Cutoff:</label>
+                                <input type="number" class="form-control" ng-model="minCutOffVal" value="0.05" step="0.01" id="minCutOffVal" placeholder="Enter Min CutOff" name="minCutOffVal" required autofocus>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="relativeCutOffVal">Relative Cutoff:</label>
+                                <input type="number" class="form-control" ng-model="relativeCutOffVal" value="0.2" step="0.1" id="relativeCutOffVal" placeholder="Enter Relative CutOff" name="relativeCutOffVal" required autofocus>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nucStainChannelVal">Nuclear Stain Channel:</label>
+                                <input type="number" class="form-control" ng-model="nucStainChannelVal" value="1" id="nucStainChannelVal" placeholder="Enter Nuclear Stain Channel" name="nucStainChannelVal" required autofocus>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nucStainCycleVal">Nuclear Stain Cycle:</label>
+                                <input type="number" class="form-control" ng-model="nucStainCycleVal" value="1" id="nucStainCycleVal" placeholder="Enter Nuclear Stain Cycle" name="nucStainCycleVal" required autofocus>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="membStainChannelVal">Membrane Stain Channel:</label>
+                                <input type="number" class="form-control" ng-model="membStainChannelVal" value="1" id="membStainChannelVal" placeholder="Enter Membrane Stain Channel" name="membStainChannelVal" required autofocus>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="membStainCycleVal">Membrane Stain Cycle:</label>
+                                <input type="number" class="form-control" ng-model="membStainCycleVal" value="-1" id="membStainCycleVal" placeholder="Enter Membrane Stain Cycle" name="membStainCycleVal" required autofocus>
+                            </div>
+
+                            <div class="form-group" >
+                                <button type="button" id="startSegm" class="btn btn-primary btn-lg center-block" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Running segmentation">Start Segmentation</button>
+                            </div>
+
+                            <div class="progress">
+                                <div id = "pro" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                    <font color="black"> 0% segmented </font>
+                                </div>
+                            </div>
+
+                        <!--Modal to get the name of the segmentation-->
+                            <div class="modal fade" id="segmModal" tabindex="-1" role="dialog" aria-labelledby="segmModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="segmModalLabel"><b>Save segmentation run</b></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="segmName" class="col-form-label">Enter name for the segmentation run</label>
+                                                <input type="text" class="form-control" id="segmName" name="segmName" required autofocus>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary" id="runSegm">Run</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <!--Modal to verify input-->
+                        <div class="modal fade" id="inpCheckmodal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"><b>Field missing</b></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Check if input user and/or experiment is selected.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Modal to display segmentation results-->
+                        <div class="modal fade" id="resultModal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"><b>Segmentation results</b></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="segmResults">
+                                        <p></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" id="resultClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $('#resultClose').click(function() {
+        location.reload();
+    });
+</script>
+
+<script type="text/javascript">
+    function showProgress() {
+        setInterval(function(){
+            jQuery.ajax({
+                type: "GET",
+                url: "/getProgress",
+                success: function(result) {
+                    $('#pro').css("width", result + '%');
+                    $('#pro').html(result + "% segmented");
+                },
+            });
+        }, 5000);
+    }
+</script>
+
+<script type="text/javascript">
+
+    var userParam;
+    var expParam;
+    var radiusParam;
+    var maxCutoffParam;
+    var minCutoffParam;
+    var relativeCutoffParam;
+    var nucStainChannelParam;
+    var nucStainCycleParam;
+    var membStainChannelParam;
+    var membStainCycleParam;
+
+    $('#segm').submit(function() {
+        jQuery(function($) {
+            $('#segmModal').modal('toggle');
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $('#startSegm').click(function() {
+            if($("#userVal").val() == -1 || $("#expVal").val() == -1) {
+                jQuery(function ($) {
+                    $('#inpCheckmodal').modal('show');
+                });
+            }
+            else {
+                userParam = $("#userVal").val();
+                expParam = $("#expVal").val();
+                radiusParam = $("#radiusVal").val();
+                maxCutoffParam = $("#maxCutOffVal").val();
+                minCutoffParam = $("#minCutOffVal").val();
+                relativeCutoffParam = $("#relativeCutOffVal").val();
+                nucStainChannelParam = $("#nucStainChannelVal").val();
+                nucStainCycleParam = $("#nucStainCycleVal").val();
+                membStainChannelParam = $("#membStainChannelVal").val();
+                membStainCycleParam = $("#membStainCycleVal").val();
+                jQuery(function ($) {
+                    $('#segmModal').modal('show');
+                });
+            }
+    });
+</script>
+
+
+<script type="text/javascript">
+    $('#runSegm').click(function() {
+        jQuery(function ($) {
+            $('#segmModal').modal('toggle');
+        });
+        RunSegmentation(userParam, expParam, radiusParam, maxCutoffParam, minCutoffParam, relativeCutoffParam, nucStainChannelParam, nucStainCycleParam, membStainChannelParam, membStainCycleParam, $('#segmName').val());
+    });
+
+    function RunSegmentation(user, exp, radius, maxCutOff, minCutOff, relativeCutOff, nucStainChannel, nucStainCycle, membStainChannel, membStainCycle, segmName) {
+        if(user != -1 && exp != -1 && radius && maxCutOff && minCutOff && relativeCutOff && nucStainChannel && nucStainCycle && membStainChannel && membStainCycle && segmName.trim().length != 0) {
+            showProgress();
+            $('#startSegm').button('loading');
+            setTimeout(function() {
+                $('#startSegm').button('reset');
+            }, 20000);
+            $.ajax({
+                type: "GET",
+                url: "/runSegm?user="+user+"&exp="+exp+"&radius="+radius+"&maxCutOff="+maxCutOff+"&minCutOff="+minCutOff+"&relativeCutOff="+relativeCutOff+"&nucStainChannel="+nucStainChannel+"&nucStainCycle="+nucStainCycle
+                +"&membStainChannel="+membStainChannel+"&membStainCycle="+membStainCycle+"&segmName="+segmName,
+                contentType: "application/json",
+                dataType: "json",
+                success: function(msg) {
+                    if(msg != null) {
+                        jQuery(function ($) {
+                            $('#resultModal').modal('show');
+                        });
+                        $('#segmResults').html(msg);
+                        var gateLink = '<br />' + "Click " + '<a href="/html/gate.html">' + '<u>' + "here" + '</u>' + '</a>' + " to proceed with gating.";
+                        $('#segmResults').append(gateLink);
+                    }
+                    else {
+                        jQuery(function ($) {
+                            $('#resultModal').modal('show');
+                        });
+                        $('#segmResults').html("Error caused by: " + msg);
+                        var errorStatus = '<br />' + "Oops! Something went wrong. Try running segmentation again or contact us! " + '<br />';
+                        $('#segmResults').append(errorStatus);
+                    }
+
+                },
+                error: function(msg) {
+                    jQuery(function ($) {
+                        $('#resultModal').modal('show');
+                    });
+                    $('#segmResults').html("Error caused by: " + msg);
+                    var errorStatus = '<br />' + "Oops! Something went wrong. Try running segmentation again or contact us! " + '<br />';
+                    $('#segmResults').append(errorStatus);
+                }
+            });
+        }
+        else {
+            jQuery(function ($) {
+                $('#resultModal').modal('show');
+            });
+            $('#segmResults').html("Some field is missing.");
+            var errorStatus = '<br />' + "Please check the segmentation parameters again!" + '<br />';
+            $('#segmResults').append(errorStatus);
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    $("#segm").submit(function() {
+        $("#user").val(userParam);
+        $("#exp").val(expParam);
+        $("#radius").val(radiusParam);
+        $("#maxCutOff").val(maxCutoffParam);
+        $("#minCutOff").val(minCutoffParam);
+        $("#relativeCutOff").val(relativeCutoffParam);
+        $("#nucStainChannel").val(nucStainChannelParam);
+        $("#nucStainCycle").val(nucStainCycleParam);
+        $("#membStainChannel").val(membStainChannelParam);
+        $("#membStainCycle").val(membStainCycleParam);
+    });
+</script>
+
+<script type="text/javascript" language="javascript">
+        $().ready(function() {
+            $.ajax({
+                type: "GET",
+                url: "/getUserList",
+                contentType: "application/json",
+                dataType: "json",
+                success: function(msg) {
+                    $("#userVal").get(0).options.length = 0;
+                    $("#userVal").get(0).options[0] = new Option("Choose user", "-1");
+                    $.each(msg, function(i,obj)
+                    {
+                        var div_data="<option value="+obj+">"+obj+"</option>";
+                        $(div_data).appendTo('#userVal');
+                    });
+                    $("#userVal").bind("change", function() {
+                        GetExperiments($(this).val());
+                    });
+                },
+                error: function() {
+                    alert("Failed to load users");
+                }
+            });
+        });
+
+        function GetExperiments(user) {
+            if(user != -1) {
+                $("#expVal").get(0).options.length = 0;
+                $.ajax({
+                    type: "GET",
+                    url: "/getExperimentList?user="+user,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function(msg) {
+                        $("#expVal").get(0).options.length = 0;
+                        $("#expVal").get(0).options[0] = new Option("Choose experiment", "-1");
+                        $.each(msg, function(i,obj)
+                        {
+                            var div_data="<option value="+obj+">"+obj+"</option>";
+                            $(div_data).appendTo('#expVal');
+                        });
+                    }
+                });
+            }
+            else {
+                $("#expVal").get(0).options.length = 0;
+                $("#expVal").get(0).options[0] = new Option("Choose experiment", "-1");
+            }
+        }
+    </script>
+</html>

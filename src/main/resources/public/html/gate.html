@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gating</title>
+    <link rel="shortcut icon" href="/images/codexlogo.ico" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/imgareaselect-default.css" />
+    <link rel="stylesheet" href="/css/sidepanel.css">
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.imgareaselect.dev.js"></script>
+    <style>
+        #photo{
+            border: 1px solid #000;
+            padding: 0;
+            display: block;
+            margin: 0 auto;
+        }
+        #gateModal {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+    <nav id="sidebar" class="active">
+        <div class="sidebar-header">
+            <h3>Codex pipeline</h3>
+            <strong>Codex</strong>
+        </div>
+
+        <ul class="list-unstyled components">
+            <li>
+                <a href="/html/home.html">
+                    <i class="glyphicon glyphicon-home"></i>
+                    Home
+                </a>
+
+                <a href="/html/uploader.html">
+                    <i class="glyphicon glyphicon-level-up"></i>
+                    Uploader
+                </a>
+
+                <a href="/html/segm.html">
+                    <i class="glyphicon glyphicon-th"></i>
+                    Segmentation
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="/html/gate.html">
+                    <i class="glyphicon glyphicon-filter"></i>
+                    Gating
+                </a>
+            </li>
+
+            <li>
+                <a href="/html/clustering.html">
+                    <i class="glyphicon glyphicon-equalizer"></i>
+                    Clustering
+                </a>
+
+                <a href="#">
+                    <i class="glyphicon glyphicon-play-circle"></i>
+                    Viewer
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="content">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn" style="background-color: #337ab7">
+                        <i class="glyphicon glyphicon-align-left"></i>
+                        <span>Menu</span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/html/faq.html">FAQ</a> </li>
+                        <li><a href="/html/contact.html">Contact</a></li>
+                        <li><a href="/html/about.html">About us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <h2>Gating</h2>
+        <p>Choose the experiment folder and select the type of FCS files from the list that you want to gate and create a filtered FCS file. You can also load the settings from a saved gate and then
+            modify it there.
+        </p>
+
+        <div class="container-fluid">
+            <!--<h2 align="center">Gating</h2><br />-->
+            <div class="row">
+                <div class="col-sm-4">
+                    <div id="gatingconfig">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><i>Specify FCS config</i></div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="user">User</label>
+                                    <select name="user" id="user" class="form-control input" placeholder="Choose user" required>
+                                        <option value="">Choose user</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exp">Experiment name</label>
+                                    <select name="exp" id="exp" class="form-control input" placeholder="Choose experiment" required>
+                                        <option value="">Choose experiment</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tstamp">Segmentation configuration</label>
+                                    <select name="tstamp" id="tstamp" class="form-control input" placeholder="Choose segmentation configuration" required>
+                                        <option value="">Choose segmentation configuration</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="fcs">FCS file type</label>
+                                    <select name="fcs" id="fcs" class="form-control input" placeholder="Choose FCS file type" required>
+                                        <option value="compensated">Compensated</option>
+                                        <option value="uncompensated">Uncompensated</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div id="imagecontainer" style="display: none;" >
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <i>
+                                Gating image
+                                </i>
+                                <!--<button class="pull-right btn btn-primary btn-xs" id="addButton" style="display:none">Add</button>-->
+                            </div>
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    <label for="x">X</label>
+                                    <select name="x" id="x" class="form-control input" placeholder="Choose X" required>
+                                        <option value="">Choose X</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="y">Y</label>
+                                    <select name="y" id="y" class="form-control input" placeholder="Choose Y" required>
+                                        <option value="">Choose Y</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group" id="imgForGate" style="display: none;">
+                                    <span class="border border-dark">
+                                        <img id="photo">
+                                    </span>
+                                </div>
+
+                                <!--Modal to get the name of the gate and save it-->
+                                <div class="modal fade" id="gateModal" tabindex="-1" role="dialog" aria-labelledby="gateModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="gateModalLabel"><b>Save as new gate</b></h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="gateName" class="col-form-label">Enter name for gate</label>
+                                                    <input type="text" class="form-control" id="gateName" name="gateName">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+                                                <button type="button" class="btn btn-primary" id="saveGate">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Modal to display the results of the gating-->
+                                <div class="modal fade" id="resultModal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title"><b>Gating results</b></h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body" id="gateResults">
+                                                <p></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="resultClose">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div id="loadGates" style="display: none;" >
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <i>
+                                Load gating configuration
+                                </i>
+                            </div>
+                            <div class="panel-body">
+                                <label for="gate">Load from existing gates</label>
+                                <select name="gate" id="gate" class="form-control input" placeholder="Load from existing gates">
+                                    <option value="">Choose gate</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+    $('#saveGate').click(function() {
+
+        $('#gateModal').modal('toggle');
+        SaveGate(userParam, expParam, tstampParam, fcsParam, $('#x').prop('selectedIndex')-1, $('#y').prop('selectedIndex')-1, coordinatesParam, $('#gateName').val());
+    });
+
+    $('#resultClose').click(function() {
+        location.reload();
+    });
+
+    function SaveGate(user, exp, tstamp, fcs, x, y, coordinates, gateName) {
+        if(user != -1 && exp != -1 && tstamp != -1 && gateName.trim().length != 0) {
+            $.ajax({
+                type: "GET",
+                url: "/saveGate?user="+user+"&exp="+exp+"&tstamp="+tstamp+"&FCS="+fcs+"&X="+x+"&Y="+y+"&coordinates="+ coordinatesParam +"&gateName="+gateName,
+                contentType: "application/json",
+                dataType: "json",
+                success: function(msg) {
+                    if(msg != null) {
+                        $('#resultModal').modal('show');
+                        $('#gateResults').html("The fcs file with the selected gate was created successfully!");
+                        var clusteringLink = '<br />' + "Click " + '<a href="/html/clustering.html">' + '<u>' + "here" + '</u>' + '</a>' + " to proceed with clustering.";
+                        $('#gateResults').append(clusteringLink);
+                    }
+                    else {
+                        $('#resultModal').modal('show');
+                        $('#gateResults').html("Error caused by: " + msg);
+                        var errorStatus = '<br />' + "Oops! Something went wrong. Try running Gating again or contact us! " + '<br />';
+                        $('#gateResults').append(errorStatus);
+                    }
+
+                },
+                error: function(msg) {
+                    $('#resultModal').modal('show');
+                    $('#gateResults').html("Error caused by: " + msg);
+                    var errorStatus = '<br />' + "Oops! Something went wrong. Try running Gating again or contact us! " + '<br />';
+                    $('#gateResults').append(errorStatus);
+                }
+            });
+        }
+        else {
+            $('#resultModal').modal('show');
+            $('#gateResults').html("Some field is missing.");
+            var errorStatus = '<br />' + "Please check the gating parameters again!" + '<br />';
+            $('#gateResults').append(errorStatus);
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $('#close').on('click',
+         function(e) {
+            jQuery(function ($) {
+                var ias = $('#photo').imgAreaSelect({instance: true});
+                ias.cancelSelection();
+            })
+         }
+    );
+</script>
+
+<script type="text/javascript" language="javascript">
+    var userParam;
+    var expParam;
+    var tstampParam;
+    var fcsParam;
+    var xParam;
+    var yParam;
+    var gateLoadImageParam = false;
+    var xpointsParam;
+    var ypointsParam;
+    var coordinatesParam;
+
+    $().ready(function() {
+        jQuery.noConflict();
+        $.ajax({
+            type: "GET",
+            url: "/getUserList",
+            contentType: "application/json",
+            dataType: "json",
+            success: function(msg) {
+                $("#user").get(0).options.length = 0;
+                $("#user").get(0).options[0] = new Option("Choose user", "-1");
+                $.each(msg, function(i,obj)
+                {
+                    var div_data="<option value="+obj+">"+obj+"</option>";
+                    $(div_data).appendTo('#user');
+                });
+            },
+            error: function() {
+                alert("Failed to load users");
+            }
+        });
+    });
+
+    $("#user").bind("change", function() {
+        GetExperiments($(this).val());
+        $("#imgForGate").css('display', 'none');
+        $('#gateName').val("");
+    });
+
+    function GetExperiments(user) {
+        if(user != -1) {
+            userParam = user;
+            $("#exp").get(0).options.length = 0;
+            $("#tstamp").get(0).options.length = 0;
+            $("#x").get(0).options.length = 0;
+            $("#y").get(0).options.length = 0;
+
+            $.ajax({
+                type: "GET",
+                url: "/getExperimentList?user="+user,
+                contentType: "application/json",
+                dataType: "json",
+                success: function(msg) {
+                    $("#exp").get(0).options.length = 0;
+                    $("#exp").get(0).options[0] = new Option("Choose experiment", "-1");
+                    $("#tstamp").get(0).options.length = 0;
+                    $("#tstamp").get(0).options[0] = new Option("Choose segmentation configuration", "-1");
+                    $("#x").get(0).options.length = 0;
+                    $("#x").get(0).options[0] = new Option("Choose X", "-1");
+                    $("#y").get(0).options.length = 0;
+                    $("#y").get(0).options[0] = new Option("Choose Y", "-1");
+                    $("#imagecontainer").css('display', 'none');
+                    $("#loadGates").css('display', 'none');
+                    jQuery(function($) {
+                        var ias = $('#photo').imgAreaSelect({ instance: true });
+                        ias.cancelSelection();
+                    });
+                    $.each(msg, function(i,obj)
+                    {
+                        var div_data="<option value="+obj+">"+obj+"</option>";
+                        $(div_data).appendTo('#exp');
+                    });
+                },
+                error: function() {
+                    alert("Failed to load experiments");
+                }
+            });
+        }
+        else {
+            $("#exp").get(0).options.length = 0;
+            $("#exp").get(0).options[0] = new Option("Choose experiment", "-1");
+            $("#tstamp").get(0).options.length = 0;
+            $("#tstamp").get(0).options[0] = new Option("Choose segmentation configuration", "-1");
+            $("#x").get(0).options.length = 0;
+            $("#x").get(0).options[0] = new Option("Choose X", "-1");
+            $("#y").get(0).options.length = 0;
+            $("#y").get(0).options[0] = new Option("Choose Y", "-1");
+            $("#imagecontainer").css('display', 'none');
+            $("#loadGates").css('display', 'none');
+            jQuery(function($) {
+                var ias = $('#photo').imgAreaSelect({ instance: true });
+                ias.cancelSelection();
+            });
+        }
+    }
+
+    $("#exp").bind("change", function() {
+        GetSegTimestamps(userParam, $('#exp').val());
+        $("#imgForGate").css('display', 'none');
+        $('#gateName').val("");
+        $("#loadGates").css('display', 'none');
+        $("#imagecontainer").css('display', 'none');
+    });
+
+    function GetSegTimestamps(user, exp) {
+        if(user != -1 && exp != -1) {
+            expParam = exp;
+            $("#tstamp").get(0).options.length = 0;
+            $.ajax({
+                type: "GET",
+                url: "/getSegTimestampsForGate?user="+user+"&exp="+exp,
+                contentType: "application/json",
+                dataType: "json",
+                success: function(msg) {
+                    $("#tstamp").get(0).options.length = 0;
+                    $("#tstamp").get(0).options[0] = new Option("Choose segmentation configuration", "-1");
+
+                    $("#imagecontainer").css('display', 'none');
+                    $("#loadGates").css('display', 'none');
+                    jQuery(function($) {
+                        var ias = $('#photo').imgAreaSelect({ instance: true });
+                        ias.cancelSelection();
+                    });
+
+                    $.each(msg, function(i,obj)
+                    {
+                        var div_data="<option value="+obj+">"+obj+"</option>";
+                        $(div_data).appendTo('#tstamp');
+                    });
+                }
+            });
+        }
+        else {
+            $("#tstamp").get(0).options.length = 0;
+            $("#tstamp").get(0).options[0] = new Option("Choose segmentation configuration", "-1");
+            $("#x").get(0).options.length = 0;
+            $("#x").get(0).options[0] = new Option("Choose X", "-1");
+            $("#y").get(0).options.length = 0;
+            $("#y").get(0).options[0] = new Option("Choose Y", "-1");
+            $("#imagecontainer").css('display', 'none');
+            jQuery(function($) {
+                var ias = $('#photo').imgAreaSelect({ instance: true });
+                ias.cancelSelection();
+            });
+        }
+    }
+
+    $("#tstamp").bind("change", function() {
+        GetXYList($("#user").val(), $("#exp").val(), $("#tstamp").val());
+        loadGates($("#user").val(), $("#exp").val(), $("#tstamp").val(), $("#fcs").val());
+        $("#imgForGate").css('display', 'none');
+        $('#gateName').val("");
+        $("#loadGates").css('display', 'none');
+        $("#imagecontainer").css('display', 'none');
+    });
+
+    $("#fcs").bind("change", function() {
+        GetXYList($("#user").val(), $("#exp").val(), $("#tstamp").val());
+        loadGates($("#user").val(), $("#exp").val(), $("#tstamp").val(), $("#fcs").val());
+        $("#imgForGate").css('display', 'none');
+        $('#gateName').val("");
+    });
+
+    function GetXYList(user, exp, tstamp) {
+        if(user != -1 && exp != -1 && tstamp != -1) {
+            tstampParam = tstamp;
+            $('#x').get(0).options.length = 0;
+            $('#y').get(0).options.length = 0;
+            $.ajax({
+                type: "GET",
+                url: "/getXYListForGate?user="+user+"&exp="+exp+"&tstamp="+tstamp,
+                contentType: "application/json",
+                dataType: "json",
+                success: function(msg) {
+                    $("#imagecontainer").show();
+                    $('#x').get(0).options.length = 0;
+                    $('#x').get(0).options[0] = new Option("Choose X", "-1");
+                    $('#y').get(0).options.length = 0;
+                    $('#y').get(0).options[0] = new Option("Choose Y", "-1");
+                    $.each(msg, function(i,obj)
+                    {
+                        var div_data="<option value="+obj+">"+obj+"</option>";
+                        $(div_data).appendTo('#x');
+                        $(div_data).appendTo('#y');
+                    });
+                }
+            });
+        }
+        else {
+            $("#x").get(0).options.length = 0;
+            $("#x").get(0).options[0] = new Option("Choose X", "-1");
+            $("#y").get(0).options.length = 0;
+            $("#y").get(0).options[0] = new Option("Choose Y", "-1");
+            $("#loadGates").css('display', 'none');
+            $("#imagecontainer").css('display', 'none');
+            jQuery(function($) {
+                var ias = $('#photo').imgAreaSelect({ instance: true });
+                ias.cancelSelection();
+            });
+        }
+    }
+
+    $("#x").bind("change", function() {
+        loadGateConfig($("#user").val(), $("#exp").val(), $("#tstamp").val(), $("#fcs").val(), $("#x").prop('selectedIndex')-1, $("#y").prop('selectedIndex')-1, -1);
+        if($("#x").val() == -1) {
+            jQuery(function($) {
+                var ias = $('#photo').imgAreaSelect({ instance: true });
+                ias.cancelSelection();
+            });
+            $("#imgForGate").css('display', 'none');
+        }
+    });
+
+    $("#y").bind("change", function() {
+        loadGateConfig($("#user").val(), $("#exp").val(), $("#tstamp").val(), $("#fcs").val(), $("#x").prop('selectedIndex')-1, $("#y").prop('selectedIndex')-1, -1);
+        if($("#y").val() == -1) {
+            jQuery(function($) {
+                var ias = $('#photo').imgAreaSelect({ instance: true });
+                ias.cancelSelection();
+            });
+            $("#imgForGate").css('display', 'none');
+        }
+    });
+
+    function loadGates(user, exp, tstamp, fcs) {
+        if(user != -1 && exp != -1 && tstamp != -1 && fcs != -1) {
+            tstampParam = tstamp;
+            fcsParam = fcs;
+
+            jQuery(function($) {
+                var ias = $('#photo').imgAreaSelect({ instance: true });
+                ias.cancelSelection();
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "/getGates?user="+user+"&exp="+exp+"&tstamp="+tstamp+"&FCS="+fcs,
+                contentType: "application/json",
+                dataType: "json",
+                success: function(msg) {
+                    if(msg.length != 0) {
+                        $("#loadGates").show();
+                    }
+                    else {
+                        $("#loadGates").css('display', 'none');
+                    }
+                    $('#gate').get(0).options.length = 0;
+                    $('#gate').get(0).options[0] = new Option("Choose gate", "-1");
+
+                    $.each(msg, function(i,obj)
+                    {
+                        if(msg.length != 0) {
+                            var div_data = "<option value=" + obj + ">" + obj + "</option>";
+                            $(div_data).appendTo('#gate');
+                        }
+                        else {
+                            $("#loadGates").css('display', 'none');
+                        }
+                    });
+                },
+                error: function() {
+                    $("#loadGates").css('display', 'none');
+                }
+            });
+
+        }
+        else {
+            $("#loadGates").css('display', 'none');
+        }
+    }
+
+    $("#gate").bind("change", function() {
+        var defaultGateOption = $('#gate').val();
+        if(defaultGateOption == -1) {
+            $('#gateName').val("");
+            $('#x').val(-1);
+            $('#y').val(-1);
+            jQuery(function($) {
+                var ias = $('#photo').imgAreaSelect({ instance: true });
+                ias.cancelSelection();
+            });
+            $("#imgForGate").css('display', 'none');
+        }
+        else {
+            loadGateConfig($("#user").val(), $("#exp").val(), $("#tstamp").val(), $("#fcs").val(), -1, -1, $("#gate").val());
+        }
+    });
+
+    function GetImage(user, exp, tstamp, fcs, x, y) {
+        if(user != -1 && exp != -1 && tstamp != -1 && x != -1 && y != -1) {
+            xParam = x;
+            yParam = y;
+            fcsParam = fcs;
+
+            jQuery(function($) {
+                var ias = $('#photo').imgAreaSelect({ instance: true });
+                ias.cancelSelection();
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "/getBiaxialPlot?user="+user+"&exp="+exp+"&tstamp="+tstamp+"&FCS="+fcs+"&X="+x+"&Y="+y,
+                contentType: "application/json",
+                dataType: "json",
+                success: function(msg) {
+                    $("#imgForGate").show();
+                    $("#photo").attr('src',msg);
+                    <!--$("#addButton").show();-->
+                    //$("#submit").show();
+                }
+            });
+        }
+        else {
+            <!--$("#addButton").css('display', 'none');-->
+            $("#imgForGate").css('display', 'none');
+            //$("#submit").css('display', 'none');
+        }
+    }
+
+    function loadGateConfig(user, exp, tstamp, fcs, x, y, gate) {
+        if (user != -1 && exp != -1 && tstamp != -1 && fcs != -1) {
+            //If gate value is selected from the list, then load the X and Y value from the JSON and then load the image
+            if (gate != -1) {
+                $.ajax({
+                    type: "GET",
+                    url: "/loadGateConfig?user=" + user + "&exp=" + exp + "&tstamp=" + tstamp + "&FCS=" + fcs + "&gate=" + gate,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (msg) {
+                        if (msg != null) {
+                            var xpoints = msg["polygon"]["xpoints"];
+                            var ypoints = msg["polygon"]["ypoints"];
+                            var x = msg["x"];
+                            var y = msg["y"];
+                            // $('#x').val(x);
+                            // $('#y').val(y);
+
+                            $("#x option:contains(" + x + ")").prop("selected", true);
+                            $("#y option:contains(" + y + ")").prop("selected", true);
+
+                            xpointsParam = xpoints;
+                            ypointsParam = ypoints;
+
+                            var xInd = $('#x').prop('selectedIndex')-1;
+                            var yInd = $('#y').prop('selectedIndex')-1;
+
+                            //Load the image based on loaded X and Y value from the saved JSON
+                            $.ajax({
+                                type: "GET",
+                                url: "/getBiaxialPlot?user=" + user + "&exp=" + exp + "&tstamp=" + tstamp + "&FCS=" + fcs + "&X=" + xInd + "&Y=" + yInd,
+                                contentType: "application/json",
+                                dataType: "json",
+                                success: function (msg1) {
+                                    $("#imgForGate").show();
+                                    $("#photo").attr('src', msg1);
+                                    gateLoadImageParam = true;
+
+                                    //Set rectangular image coordinates here
+                                    jQuery(function ($) {
+                                        $('img#photo').on('load', function () {
+                                            if (gateLoadImageParam) {
+                                                $('img#photo').imgAreaSelect({
+                                                    x1: xpointsParam[0],
+                                                    y1: ypointsParam[1],
+                                                    x2: xpointsParam[2],
+                                                    y2: ypointsParam[3]
+                                                });
+                                                gateLoadImageParam = false;
+                                            }
+                                        });
+                                    });
+                                }
+                            });
+                        }
+                         else {
+                            GetImage($("#user").val(), $("#exp").val(), $("#tstamp").val(), $("#fcs").val(), $("#x").prop('selectedIndex')-1, $("#y").prop('selectedIndex')-1);
+                        }
+                    },
+                    error: function () {
+                        alert("Oops, something went wrong!");
+                    }
+                });
+            }
+
+            //If X and Y is selected from the list, load the gate name from the JSON and load the image based on x and y.
+            else if(x != -1 && y != -1) {
+                $.ajax({
+                    type: "GET",
+                    url: "/loadGateConfig?user="+user+"&exp="+exp+"&tstamp="+tstamp+"&FCS="+fcs+"&X="+x+"&Y="+y,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (msg) {
+                        if (msg != null) {
+                            var xpoints = msg["polygon"]["xpoints"];
+                            var ypoints = msg["polygon"]["ypoints"];
+                            var gateName = msg["gateName"];
+
+                            xpointsParam = xpoints;
+                            ypointsParam = ypoints;
+
+                            //Load the image based on x and y values from the drop down
+                            $.ajax({
+                                type: "GET",
+                                url: "/getBiaxialPlot?user=" + user + "&exp=" + exp + "&tstamp=" + tstamp + "&FCS=" + fcs + "&X=" + x + "&Y=" + y,
+                                contentType: "application/json",
+                                dataType: "json",
+                                success: function (msg1) {
+                                    $("#imgForGate").show();
+                                    $("#photo").attr('src', msg1);
+                                    $('#gate').val(gateName);
+                                    gateLoadImageParam = true;
+
+                                    //Set rectangular image coordinates here
+                                    jQuery(function ($) {
+                                        $('img#photo').on('load', function () {
+                                            if (gateLoadImageParam) {
+                                                $('img#photo').imgAreaSelect({
+                                                    x1: xpointsParam[0],
+                                                    y1: ypointsParam[1],
+                                                    x2: xpointsParam[2],
+                                                    y2: ypointsParam[3]
+                                                });
+                                                gateLoadImageParam = false;
+                                            }
+                                        });
+                                    });
+                                }
+                            });
+                        }
+                        else {
+                            GetImage($("#user").val(), $("#exp").val(), $("#tstamp").val(), $("#fcs").val(), $("#x").prop('selectedIndex')-1, $("#y").prop('selectedIndex')-1);
+                            $('#gate').val(-1);
+                        }
+                    },
+                    error: function () {
+                        alert("Oops, something went wrong!");
+                    }
+                });
+
+            }
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+    $('img#photo').imgAreaSelect({
+        onSelectEnd: function (img, selection) {
+            var xList = [
+                selection.x1, selection.x2, selection.x2,selection.x1
+            ];
+            var yList = [
+                selection.y1, selection.y1,selection.y2, selection.y2
+            ];
+            var coordinatesList = [
+                {
+                    x : xList,
+                    y: yList
+                }
+            ];
+
+            xpointsParam = xList;
+            ypointsParam = yList;
+
+            if(selection.x1 != selection.x2 && selection.y1 != selection.y2) {
+                jQuery.noConflict();
+                $('#coordinatesVal').val(JSON.stringify(coordinatesList));
+                coordinatesParam = JSON.stringify(coordinatesList);
+                if($('#gate').val() == -1) {
+                    $('#gateModal').modal('show');
+                }
+                else {
+                    var xInd = $('#x').prop('selectedIndex')-1;
+                    var yInd = $('#y').prop('selectedIndex')-1;
+                    $.ajax({
+                        type: "GET",
+                        url: "/saveGate?user=" + $('#user').val() + "&exp=" + $('#exp').val() + "&tstamp=" + $('#tstamp').val() + "&FCS=" + $('#fcs').val()
+                            + "&X=" + xInd + "&Y=" + yInd
+                            + "&gateName=" + $('#gate').val() + "&coordinates=" + coordinatesParam,
+                        contentType: "application/json",
+                        dataType: "json",
+                        success: function (msg) {
+                            $.ajax({
+                                type: "GET",
+                                url: "/getBiaxialPlot?user=" + $('#user').val() + "&exp=" + $('#exp').val() + "&tstamp=" + $('#tstamp').val() + "&FCS=" + $('#fcs').val()
+                                    + "&X=" + xInd + "&Y=" + yInd,
+                                contentType: "application/json",
+                                dataType: "json",
+                                success: function (msg1) {
+                                    $("#imgForGate").show();
+                                    $("#photo").attr('src', msg1);
+                                    gateLoadImageParam = true;
+
+                                    //Set rectangular image coordinates here
+                                    jQuery(function ($) {
+                                        $('img#photo').on('load', function () {
+                                            if (gateLoadImageParam) {
+                                                $('img#photo').imgAreaSelect({
+                                                    x1: xpointsParam[0],
+                                                    y1: ypointsParam[1],
+                                                    x2: xpointsParam[2],
+                                                    y2: ypointsParam[3]
+                                                });
+                                                gateLoadImageParam = false;
+                                            }
+                                        });
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    $("#saveGate").submit(function() {
+        $("#userVal").val(userParam);
+        $("#expVal").val(expParam);
+        $("#tstampVal").val(tstampParam);
+        $("#fcsVal").val(fcsParam);
+        $("#xVal").val(xParam);
+        $("#yVal").val(yParam);
+    });
+</script>
+
+<!--<script type="text/javascript">-->
+<!--$("#addButton").click(function () {-->
+<!--var count = function(i, val) { return val*1+1 } ;-->
+<!--var inputHtml = $('<div class="panel panel-default">' +-->
+<!--'<div class="panel-heading">' +-->
+<!--'Gating image' +-->
+<!--'<button class="pull-right btn btn-primary btn-xs" id="addButton" style="display:none">Add</button>' +-->
+<!--'</div>' +-->
+<!--'<div class="panel-body">' +-->
+<!--'<div class="form-group">' +-->
+<!--'<label for="x' + count+1 + '">X</label>' +-->
+<!--'<select name="x' + count+1 + '" id="x' + count+1 + '" class="form-control input" placeholder="Choose X" required>' +-->
+<!--'<option value="">Choose X</option>' +-->
+<!--'</select>' +-->
+<!--'</div>' +-->
+<!--'<div class="form-group">' +-->
+<!--'<label for="y' + count+1 + '">Y</label>' +-->
+<!--'<select name="y' + count+1 + '" id="y' + count+1 + '" class="form-control input" placeholder="Choose Y" required>' +-->
+<!--'<option value="">Choose Y</option>' +-->
+<!--'</select>' +-->
+<!--'</div>' +-->
+<!--'<div class="form-group" id="imgForGate" style="display: none;">' +-->
+<!--'<img src="/images/cinqueterre.jpg" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="photo">' +-->
+<!--'</div>' +-->
+<!--'</div>' +-->
+<!--'</div>');-->
+<!--$("#imagecontainer").append(inputHtml);-->
+<!--GetXYList($("#user").val(), $("#exp").val(), $("#tstamp").val(), count);-->
+<!--});-->
+<!--</script>-->
+</html>
