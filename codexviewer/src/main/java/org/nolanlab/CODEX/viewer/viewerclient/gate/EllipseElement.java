@@ -1,6 +1,6 @@
 /*     */ package org.nolanlab.CODEX.viewer.viewerclient.gate;
 /*     */ 
-/*     */ import org.jdom.Element;
+/*     */ import org.jdom2.Element;
 /*     */ 
 /*     */ 
 /*     */ 

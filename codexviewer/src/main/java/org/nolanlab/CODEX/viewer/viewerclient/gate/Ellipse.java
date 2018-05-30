@@ -1,147 +1,21 @@
 /*      */ package org.nolanlab.CODEX.viewer.viewerclient.gate;
 /*      */ 
-/*      */ import java.awt.Shape;
+/*      */ import cern.colt.function.DoubleDoubleFunction;
+import cern.colt.function.DoubleFunction;
+import cern.colt.matrix.DoubleFactory2D;
+import cern.colt.matrix.DoubleMatrix2D;
+import cern.colt.matrix.impl.DenseDoubleMatrix1D;
+import cern.colt.matrix.impl.DenseDoubleMatrix2D;
+import cern.colt.matrix.linalg.Algebra;
+import cern.colt.matrix.linalg.EigenvalueDecomposition;
+import org.nolanlab.CODEX.segm.segmserver.MatrixOp;
+
+import java.awt.Shape;
 /*      */ import java.awt.geom.AffineTransform;
-/*      */ import java.awt.geom.Ellipse2D.Double;
-/*      */ import java.awt.geom.Point2D;
-/*      */ import java.awt.geom.Point2D.Double;
-/*      */ import org.cytobank.math.Matrix;
-/*      */ import org.cytobank.math.Matrix.ValueLocationPair;
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
+/*      */ import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
+import java.util.Arrays;
+
 /*      */ public class Ellipse
 /*      */   extends Gate2D
 /*      */ {
@@ -175,94 +49,17 @@
 /*      */   {
 /*  176 */     this(id, bins, center.getX(), center.getY(), major, minor, angle, xChannel, yChannel);
 /*      */   }
-/*      */   
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
+
 /*      */ 
 /*      */ 
 /*      */   public Ellipse(int id, int bins, double doubleX, double doubleY, double major, double minor, double angle, int xChannel, int yChannel)
 /*      */   {
-/*  218 */     this(id, doubleX, doubleY, major, minor, angle, xChannel, yChannel, -1, bins, bins, bins, bins);
+/*  218 */     this(id, doubleX, doubleY, major, minor, angle, xChannel, yChannel, bins, bins, bins, bins);
 /*      */   }
-/*      */   
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */   public Ellipse(int id, double doubleX, double doubleY, double major, double minor, double angle, int xChannel, int yChannel, int compensationID, int xBins, int yBins, int xSize, int ySize)
+
+/*      */   public Ellipse(int id, double doubleX, double doubleY, double major, double minor, double angle, int xChannel, int yChannel, int xBins, int yBins, int xSize, int ySize)
 /*      */   {
-/*  265 */     super(id, (int)doubleX, (int)doubleY, (int)major, (int)minor, xChannel, yChannel, compensationID, xBins, yBins, xSize, ySize);
+/*  265 */     super(id, (int)doubleX, (int)doubleY, (int)major, (int)minor, xChannel, yChannel, -1, xBins, yBins, xSize, ySize);
 /*      */     
 /*      */ 
 /*  268 */     this.doubleX = doubleX;
@@ -816,14 +613,9 @@
 /*      */   {
 /*  817 */     if ((point1 == null) || (point2 == null))
 /*      */     {
-/*  819 */       return NaN.0D;
+/*  819 */       return Double.NaN;
 /*      */     }
 /*      */     
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
-/*      */ 
 /*  827 */     if (point1.getX() == point2.getX())
 /*      */     {
 /*      */ 
@@ -843,9 +635,9 @@
 /*  843 */     return Math.atan((point1.getY() - point2.getY()) / (point1.getX() - point2.getX()));
 /*      */   }
 /*      */   
-/*      */   public Matrix getCovarianceMatrix()
+/*      */   public DoubleMatrix2D getCovarianceMatrix()
 /*      */   {
-/*  848 */     Matrix covInverse = new Matrix(2, 2);
+/*  848 */     DoubleMatrix2D covInverse = new DenseDoubleMatrix2D(2, 2);
 /*  849 */     double cosAngle = Math.cos(this.angle);
 /*  850 */     double cosAngleSquare = cosAngle * cosAngle;
 /*  851 */     double sinAngle = Math.sin(this.angle);
@@ -855,14 +647,14 @@
 /*  855 */     double aSquare = a * a;
 /*  856 */     double bSquare = b * b;
 /*      */     
-/*  858 */     covInverse.setValueAt(0, 0, cosAngleSquare / aSquare + sinAngleSquare / bSquare);
-/*  859 */     covInverse.setValueAt(1, 1, sinAngleSquare / aSquare + cosAngleSquare / bSquare);
+/*  858 */     covInverse.set(0, 0, cosAngleSquare / aSquare + sinAngleSquare / bSquare);
+/*  859 */     covInverse.set(1, 1, sinAngleSquare / aSquare + cosAngleSquare / bSquare);
 /*      */     
 /*  861 */     double nonDiagonalValue = sinAngle * cosAngle * (1.0D / aSquare - 1.0D / bSquare);
-/*  862 */     covInverse.setValueAt(0, 1, nonDiagonalValue);
-/*  863 */     covInverse.setValueAt(1, 0, nonDiagonalValue);
+/*  862 */     covInverse.set(0, 1, nonDiagonalValue);
+/*  863 */     covInverse.set(1, 0, nonDiagonalValue);
 /*      */     
-/*  865 */     return Matrix.inverse(covInverse);
+/*  865 */     return Algebra.DEFAULT.inverse(covInverse);
 /*      */   }
 /*      */   
 /*      */ 
@@ -1006,7 +798,7 @@
 /* 1006 */       P[0][i] = points[i].getX();
 /* 1007 */       P[1][i] = points[i].getY();
 /*      */     }
-/* 1009 */     Matrix matrixP = new Matrix(P);
+/* 1009 */     DoubleMatrix2D matrixP = new DenseDoubleMatrix2D(P);
 /*      */     
 /*      */ 
 /* 1012 */     double[][] Q = new double[d + 1][N];
@@ -1015,10 +807,10 @@
 /* 1015 */       Q[1][i] = points[i].getY();
 /* 1016 */       Q[2][i] = 1.0D;
 /*      */     }
-/* 1018 */     Matrix matrixQ = new Matrix(Q);
+/* 1018 */     DoubleMatrix2D matrixQ = new DenseDoubleMatrix2D(Q);
 /*      */     
 /*      */ 
-/* 1021 */     Matrix matrixQt = Matrix.transpose(matrixQ);
+/* 1021 */     DoubleMatrix2D matrixQt = Algebra.DEFAULT.transpose(matrixQ);
 /*      */     
 /*      */ 
 /*      */ 
@@ -1036,34 +828,38 @@
 /*      */ 
 /* 1037 */     while ((err > errTolerance) && (count < maxCount))
 /*      */     {
-/* 1039 */       Matrix matrixU = Matrix.diag(u);
+/* 1039 */       DoubleMatrix2D matrixU =  DoubleFactory2D.dense.diagonal(new DenseDoubleMatrix1D(u));
+/*      */
+/* 1042 */       DoubleMatrix2D matrixX = Algebra.DEFAULT.mult(matrixQ, Algebra.DEFAULT.mult(matrixU, matrixQt));
 /*      */       
+/* 1047 */       double[] M = DoubleFactory2D.dense.diagonal(Algebra.DEFAULT.mult(matrixQt, Algebra.DEFAULT.mult(Algebra.DEFAULT.inverse(matrixX), matrixQ))).toArray();
+/*      */
+                 double maximum = Double.NEGATIVE_INFINITY;
+                 int j = -1;
+
+        for (int i = 0; i < M.length; i++) {
+            if(M[i]>maximum){
+               maximum = M[i];
+                j = i;
+            }
+        }
+
+
 /*      */ 
-/* 1042 */       Matrix matrixX = Matrix.multiply(matrixQ, Matrix.multiply(matrixU, matrixQt));
-/*      */       
-/*      */ 
-/*      */ 
-/*      */ 
-/* 1047 */       double[] M = Matrix.diag(Matrix.multiply(matrixQt, Matrix.multiply(Matrix.inverse(matrixX), matrixQ)));
-/*      */       
-/*      */ 
-/* 1050 */       Matrix.ValueLocationPair maxValueAndIndex = Matrix.findVectorMaximumAndIndex(M);
-/* 1051 */       double maximum = maxValueAndIndex.getValue();
-/* 1052 */       int j = maxValueAndIndex.getLocation();
+/* 1050 */
+
 /*      */       
 /*      */ 
 /* 1055 */       double stepSize = (maximum - d - 1.0D) / ((d + 1) * (maximum - 1.0D));
 /*      */       
 /*      */ 
-/*      */ 
-/* 1059 */       double[] newU = Matrix.multiplyVectorByConstant(u, 1.0D - stepSize);
-/*      */       
-/*      */ 
+/*      */       double[] newU = Arrays.copyOf(u,u.length);
+/* 1059 */       MatrixOp.mult(u, 1.0D - stepSize);
+/*      */
 /* 1062 */       newU[j] += stepSize;
 /*      */       
-/*      */ 
-/*      */ 
-/* 1066 */       err = Math.sqrt(Matrix.sumOfSquareDifferences(newU, u));
+/*      */        double[] diff = MatrixOp.diff(newU, u);
+/* 1066 */       err = MatrixOp.lenght(diff);
 /*      */       
 /*      */ 
 /* 1069 */       count++;
@@ -1073,33 +869,43 @@
 /*      */ 
 /*      */ 
 /*      */ 
-/* 1076 */     Matrix matrixU = Matrix.diag(u);
+/* 1076 */     DoubleMatrix2D matrixU = DoubleFactory2D.dense.diagonal(new DenseDoubleMatrix1D(u));
 /*      */     
 /*      */ 
 /*      */ 
-/* 1080 */     Matrix matrixPUPt = Matrix.multiply(matrixP, Matrix.multiply(matrixU, Matrix.transpose(matrixP)));
-/* 1081 */     Matrix matrixPu = Matrix.multiply(matrixP, u);
-/* 1082 */     Matrix matrixPut = Matrix.transpose(matrixPu);
-/* 1083 */     Matrix matrixPuPut = Matrix.multiply(matrixPu, matrixPut);
-/* 1084 */     Matrix matrixPUPt_minus_PuPut = Matrix.subtract(matrixPUPt, matrixPuPut);
-/* 1085 */     Matrix matrixInv_PUPt_minus_PuPut = Matrix.inverse(matrixPUPt_minus_PuPut);
-/* 1086 */     Matrix matrixA = matrixInv_PUPt_minus_PuPut.multiplyByConstant(1.0D / d);
+/* 1080 */     DoubleMatrix2D matrixPUPt = Algebra.DEFAULT.mult(matrixP, Algebra.DEFAULT.mult(matrixU, Algebra.DEFAULT.transpose(matrixP)));
+/* 1081 */     DoubleMatrix2D matrixPu = Algebra.DEFAULT.mult(matrixP, matrixU);
+/* 1082 */     DoubleMatrix2D matrixPut = Algebra.DEFAULT.transpose(matrixPu);
+/* 1083 */     DoubleMatrix2D matrixPuPut = Algebra.DEFAULT.mult(matrixPu, matrixPut);
+
+    DoubleDoubleFunction minus = new DoubleDoubleFunction() {
+        public double apply(double a, double b) { return a-b; }
+    };
+                DoubleMatrix2D matrixPUPt_minus_PuPut = matrixPUPt.assign( matrixPuPut, minus);
+/* 1085 */     DoubleMatrix2D matrixInv_PUPt_minus_PuPut = Algebra.DEFAULT.inverse(matrixPUPt_minus_PuPut);
+/* 1086 */     DoubleMatrix2D matrixA = matrixInv_PUPt_minus_PuPut.assign(new DoubleFunction() {
+        @Override
+        public double apply(double v) {
+            return v /d;
+        }
+    });
 /*      */     
 /*      */ 
-/* 1089 */     Matrix matrixCenter = matrixPu;
-/* 1090 */     this.doubleX = matrixCenter.getValueAt(0, 0);
-/* 1091 */     this.doubleY = matrixCenter.getValueAt(1, 0);
+/* 1089 */     DoubleMatrix2D matrixCenter = matrixPu;
+/* 1090 */     this.doubleX = matrixCenter.get(0, 0);
+/* 1091 */     this.doubleY = matrixCenter.get(1, 0);
 /*      */     
 /*      */ 
-/* 1094 */     Matrix cov = Matrix.inverse(matrixA);
+/* 1094 */     DoubleMatrix2D cov = Algebra.DEFAULT.inverse(matrixA);
 /*      */     
+/*      */     EigenvalueDecomposition ed = new EigenvalueDecomposition(cov);
 /*      */ 
-/*      */ 
-/* 1098 */     double[] lambdas = Matrix.eigenValues(cov);
+/* 1098 */     double[] lambdas = ed.getRealEigenvalues().toArray();
 /* 1099 */     this.minor = (2.0D * Math.sqrt(lambdas[0]));
 /* 1100 */     this.major = (2.0D * Math.sqrt(lambdas[1]));
-/*      */     
-/* 1102 */     double[][] eigenVectors = Matrix.eigenVectors(cov);
+/*      */
+
+/* 1102 */     double[][] eigenVectors = ed.getV().toArray();
 /* 1103 */     double[] eigenVector1 = eigenVectors[0];double[] eigenVector2 = null;
 /* 1104 */     if (eigenVectors.length == 2)
 /*      */     {

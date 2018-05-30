@@ -3,7 +3,7 @@
 /*      */ import java.util.ArrayList;
 /*      */ import java.util.Iterator;
 /*      */ import java.util.List;
-/*      */ import org.jdom.Element;
+/*      */ import org.jdom2.Element;
 /*      */ 
 /*      */ 
 /*      */ 
@@ -753,7 +753,7 @@
 /*      */ 
 /*      */ 
 /*      */ 
-/*  756 */     double xMin = NaN.0D;
+/*  756 */     double xMin = Double.POSITIVE_INFINITY;
 /*      */     
 /*      */ 
 /*  759 */     Element xMinElement = element.getChild("xMin");
@@ -767,14 +767,14 @@
 /*      */       }
 /*      */       catch (NumberFormatException nfe)
 /*      */       {
-/*  770 */         xMin = NaN.0D;
+/*  770 */         xMin = Double.POSITIVE_INFINITY;
 /*      */       }
 /*      */     }
 /*      */     
 /*      */ 
 /*      */ 
 /*      */ 
-/*  777 */     double xMax = NaN.0D;
+/*  777 */     double xMax =Double.NEGATIVE_INFINITY;
 /*      */     
 /*      */ 
 /*  780 */     Element xMaxElement = element.getChild("xMax");
@@ -788,14 +788,14 @@
 /*      */       }
 /*      */       catch (NumberFormatException nfe)
 /*      */       {
-/*  791 */         xMax = NaN.0D;
+/*  791 */         xMax = Double.NEGATIVE_INFINITY;
 /*      */       }
 /*      */     }
 /*      */     
 /*      */ 
 /*      */ 
 /*      */ 
-/*  798 */     double yMin = NaN.0D;
+/*  798 */     double yMin = Double.POSITIVE_INFINITY;
 /*      */     
 /*      */ 
 /*  801 */     Element yMinElement = element.getChild("yMin");
@@ -809,14 +809,14 @@
 /*      */       }
 /*      */       catch (NumberFormatException nfe)
 /*      */       {
-/*  812 */         yMin = NaN.0D;
+/*  812 */         yMin = Double.POSITIVE_INFINITY;
 /*      */       }
 /*      */     }
 /*      */     
 /*      */ 
 /*      */ 
 /*      */ 
-/*  819 */     double yMax = NaN.0D;
+/*  819 */     double yMax = Double.NEGATIVE_INFINITY;
 /*      */     
 /*      */ 
 /*  822 */     Element yMaxElement = element.getChild("yMax");
@@ -830,7 +830,7 @@
 /*      */       }
 /*      */       catch (NumberFormatException nfe)
 /*      */       {
-/*  833 */         yMax = NaN.0D;
+/*  833 */         yMax  = Double.NEGATIVE_INFINITY;
 /*      */       }
 /*      */     }
 /*      */     

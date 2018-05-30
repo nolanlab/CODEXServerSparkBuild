@@ -1,6 +1,7 @@
 /*      */ package org.nolanlab.CODEX.viewer.viewerclient;
 /*      */ 
 /*      */ import org.nolanlab.CODEX.viewer.viewerclient.gate.*;
+import org.nolanlab.CODEX.viewer.viewerclient.i5d.GateClient;
 /*      */ import java.awt.Color;
 /*      */ import java.awt.Dimension;
 /*      */ import java.awt.Graphics;
@@ -24,19 +25,19 @@
 /*      */ {
 
             private final GateClient client;
-/*   75 */   static final CanvasMode SELECT = new CanvasMode("Select", null);
+/*   75 */   static final CanvasMode SELECT = new CanvasMode("Select");
 
-/*   80 */   static final CanvasMode RECTANGLE = new CanvasMode("Rectangle", null);
+/*   80 */   static final CanvasMode RECTANGLE = new CanvasMode("Rectangle");
 
-/*   85 */   static final CanvasMode ELLIPSE = new CanvasMode("Ellipse", null);
+/*   85 */   static final CanvasMode ELLIPSE = new CanvasMode("Ellipse");
 
-/*   90 */   static final CanvasMode POLYGON = new CanvasMode("Polygon", null);
+/*   90 */   static final CanvasMode POLYGON = new CanvasMode("Polygon");
 
-/*   95 */   static final CanvasMode QUADRANT = new CanvasMode("Quadrant", null);
+/*   95 */   static final CanvasMode QUADRANT = new CanvasMode("Quadrant");
 
-/*  100 */   static final CanvasMode SPLIT = new CanvasMode("Split", null);
+/*  100 */   static final CanvasMode SPLIT = new CanvasMode("Split");
 
-/*  105 */   static final CanvasMode RANGE = new CanvasMode("Range", null);
+/*  105 */   static final CanvasMode RANGE = new CanvasMode("Range");
 /*      */   private static final int DEFAULT_WIDTH = 256;
 /*      */   private static final int DEFAULT_HEIGHT = 256;
 /*      */   private static final int BORDER_SIZE = 2;
@@ -312,7 +313,7 @@
 /*  681 */     int axisBins = this.client.getAxisBins();
 /*      */     
 /*      */ 
-/*  684 */     return new Ellipse(this.client.getNextGateID(), point.getX(), point.getY(), (int)major, (int)minor, angle, getXChannel(), getYChannel(), this.client.getCompensationID(), axisBins, axisBins, axisBins, axisBins);
+/*  684 */     return new Ellipse(this.client.getNextGateID(), point.getX(), point.getY(), (int)major, (int)minor, angle, getXChannel(), getYChannel(),  axisBins, axisBins, axisBins, axisBins);
 /*      */   }
 
 /*      */ 
@@ -338,27 +339,9 @@
 /*  716 */     int axisBins = this.client.getAxisBins();
 /*      */     
 /*      */ 
-/*  719 */     return new Rectangle(this.client.getNextGateID(), (int)leftX, (int)bottomY, (int)width, (int)height, getXChannel(), getYChannel(), this.client.getCompensationID(), axisBins, axisBins, axisBins, axisBins);
+/*  719 */     return new Rectangle(this.client.getNextGateID(), (int)leftX, (int)bottomY, (int)width, (int)height, getXChannel(), getYChannel(), -1, axisBins, axisBins, axisBins, axisBins);
 /*      */   }
 
-/*      */   private Range createRangeGate(Point2D point1, Point2D point2)
-/*      */   {
-/*  732 */     if ((this.client == null) || (point1 == null) || (point2 == null))
-/*      */     {
-/*  734 */       return null;
-/*      */     }
-
-/*  739 */     double leftX = Math.min(point1.getX(), point2.getX());
-/*      */     
-/*      */ 
-/*  742 */     double width = Math.abs(point2.getX() - point1.getX());
-/*      */     
-/*      */ 
-/*  745 */     int axisBins = this.client.getAxisBins();
-/*      */     
-/*      */ 
-/*  748 */     return new Range(this.client.getNextGateID(), (int)leftX, (int)point1.getY(), (int)width, getHeight(), getXChannel(), this.client.getCompensationID(), axisBins, axisBins);
-/*      */   }
 
 /*      */   protected void paintComponent(Graphics g)
 /*      */   {
@@ -402,7 +385,7 @@
 /*  812 */     Graphics2D g2 = (Graphics2D)g;
 
 /*  818 */     AffineTransform saved = g2.getTransform();
-/
+
 /*  825 */     if (this.gridP)
 /*      */     {
 /*      */ 
@@ -449,8 +432,7 @@
 /*      */     Gate[] gates;
 /*      */     
 /*      */ 
-/*      */     Gate[] gates;
-/*      */     
+/*      */
 /*  873 */     if (this.client == null)
 /*      */     {
 /*  875 */       gates = new Gate[0];
@@ -558,7 +540,7 @@
 /*      */       
 /*      */ 
 /*      */ 
-/* 1028 */       int axisBins = this.client.getAxisBins();
+/* 1028 */       int axisBins = 256;
 /*      */       
 /* 1030 */       if ((this.mode == SELECT) && (e.getClickCount() == 2))
 /*      */       {
@@ -575,26 +557,18 @@
 /* 1042 */           if (((gates[i].getXChannel() == this.xChannel) && (gates[i].getYChannel() == this.yChannel) && (gates[i].contains(p))) || ((gates[i].getXChannel() == this.yChannel) && (gates[i].getYChannel() == this.xChannel) && (gates[i].contains(flippedPoint))))
 /*      */           {
 /*      */ 
-/* 1045 */             this.client.addGateToActiveGateSet(gates[i]);
-/*      */             
+/*      */
 /* 1047 */             break;
 /*      */           }
 /*      */         }
 /*      */       }
-/* 1051 */       if (this.mode == QUADRANT)
-/*      */       {
-/* 1053 */         this.client.addQuadrantGateSet(new Quadrant(this.client.getNextGateID(), (int)p.getX(), (int)p.getY(), getWidth(), getHeight(), getXChannel(), getYChannel(), this.client.getCompensationID(), axisBins, axisBins, axisBins, axisBins));
-/*      */       }
-/* 1055 */       else if (this.mode == SPLIT)
-/*      */       {
-/* 1057 */         this.client.addSplitGateSet(new Split(this.client.getNextGateID(), (int)p.getX(), (int)p.getY(), getWidth(), getHeight(), getXChannel(), this.client.getCompensationID(), axisBins, axisBins));
-/*      */       }
+/* 1051 */
 /* 1059 */       else if (this.mode == POLYGON)
 /*      */       {
 /* 1061 */         if ((e.getClickCount() == 2) || ((this.points.size() > 0) && (p.distance((Point2D)this.points.get(0)) < 7.0D)))
 /*      */         {
 /*      */ 
-/* 1064 */           this.client.addGate(new Polygon(this.client.getNextGateID(), this.points, this.xChannel, this.yChannel, this.client.getCompensationID(), axisBins, axisBins, axisBins, axisBins));
+/* 1064 */           this.client.addGate(new Polygon(this.client.getNextGateID(), this.points, this.xChannel, this.yChannel, -1, axisBins, axisBins, axisBins, axisBins));
 /*      */           
 /*      */ 
 /* 1067 */           clear();
@@ -637,8 +611,7 @@
 /*      */       return;
 /*      */     }
 /*      */     
-/*      */ 
-/*      */     Point2D oldPoint;
+/*      */
 /*      */     
 /*      */ 
 /*      */     Point2D oldPoint;
@@ -669,10 +642,6 @@
 /* 1136 */       else if (this.mode == RECTANGLE)
 /*      */       {
 /* 1138 */         this.current = createRectangleGate(this.point, this.point2);
-/*      */       }
-/* 1140 */       else if (this.mode == RANGE)
-/*      */       {
-/* 1142 */         this.current = createRangeGate(this.point, this.point2);
 /*      */       }
 /*      */       
 /*      */ 
@@ -767,14 +736,14 @@
 /*      */     
 /* 1266 */     if (this.mode == QUADRANT)
 /*      */     {
-/* 1268 */       this.current = new Quadrant(this.client.getNextGateID(), (int)mouse.getX(), (int)mouse.getY(), getWidth(), getHeight(), getXChannel(), getYChannel(), this.client.getCompensationID(), axisBins, axisBins, axisBins, axisBins);
+/* 1268 */       this.current = new Quadrant(this.client.getNextGateID(), (int)mouse.getX(), (int)mouse.getY(), getWidth(), getHeight(), getXChannel(), getYChannel(), -1, axisBins, axisBins, axisBins, axisBins);
 /*      */       
 /*      */ 
 /* 1271 */       repaint();
 /*      */     }
 /* 1273 */     else if (this.mode == SPLIT)
 /*      */     {
-/* 1275 */       this.current = new Split(this.client.getNextGateID(), (int)mouse.getX(), (int)mouse.getY(), getWidth(), getHeight(), getXChannel(), this.client.getCompensationID(), axisBins, axisBins);
+/* 1275 */       this.current = new Split(this.client.getNextGateID(), (int)mouse.getX(), (int)mouse.getY(), getWidth(), getHeight(), getXChannel(), -1, axisBins, axisBins);
 /*      */       
 /*      */ 
 /* 1278 */       repaint();
@@ -907,10 +876,7 @@
 /*      */         {
 /* 1436 */           gate = createEllipseGate(this.point, this.point2);
 /*      */         }
-/* 1438 */         else if (this.mode == RANGE)
-/*      */         {
-/* 1440 */           gate = createRangeGate(this.point, this.point2);
-/*      */         }
+
 /* 1442 */         else if (this.mode == RECTANGLE)
 /*      */         {
 /* 1444 */           gate = createRectangleGate(this.point, this.point2);
@@ -1002,7 +968,7 @@
 /*      */       {
 /* 1554 */         selectedGates[i] = this.client.isSelected(gates[i]);
 /*      */         
-/* 1556 */         if (selectedGates[i] != 0)
+/* 1556 */         if (selectedGates[i])
 /*      */         {
 /* 1558 */           if (numSelected <= 0)
 /*      */           {
@@ -1067,7 +1033,7 @@
 /* 1619 */             if ((!(gates[i] instanceof Quad)) && (!(gates[i] instanceof SplitRange)))
 /*      */             {
 
-/* 1624 */               if (selectedGates[i] != 0)
+/* 1624 */               if (selectedGates[i])
 /*      */               {
 /* 1626 */                 this.client.removeGate(gates[i]);
 /*      */               }
@@ -1102,7 +1068,7 @@
 /*      */           
 /*      */ 
 /* 1662 */           for (int i = 0; i < gates.length; i++) {
-/* 1663 */             if (selectedGates[i] != 0)
+/* 1663 */             if (selectedGates[i])
 /*      */             {
 /* 1665 */               if ((gates[i].getXChannel() == this.xChannel) && (gates[i].getYChannel() == this.yChannel))
 /*      */               {

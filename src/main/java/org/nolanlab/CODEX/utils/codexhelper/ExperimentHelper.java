@@ -2,8 +2,10 @@ package org.nolanlab.CODEX.utils.codexhelper;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import org.nolanlab.CODEX.driffta.Experiment;
+import org.nolanlab.CODEX.utils.ServerConfig;
 
 import java.io.*;
 import java.lang.reflect.Modifier;
@@ -200,6 +202,30 @@ public class ExperimentHelper {
             }
         } while (proc.isAlive());
         log("Process done");
+    }
+
+    public String loadIpFromJson(File f, String selectedServer) throws FileNotFoundException {
+        Gson gson = new Gson();
+        JsonReader reader = new JsonReader(new FileReader(f));
+        java.lang.reflect.Type type = new TypeToken<Map<String, String>>(){}.getType();
+        Map<String, String> map = gson.fromJson(reader, type);
+        return map.get(selectedServer);
+    }
+
+    public String loadUploaderCacheFromJson(File f, String selectedServer) throws FileNotFoundException {
+        Gson gson = new Gson();
+        JsonReader reader = new JsonReader(new FileReader(f));
+        java.lang.reflect.Type type = new TypeToken<Map<String, ServerConfig>>(){}.getType();
+        Map<String, ServerConfig> map = gson.fromJson(reader, type);
+        return map.get(selectedServer).getUploaderCache();
+    }
+
+    public int loadNumGpuFromJson(File f, String selectedServer) throws FileNotFoundException {
+        Gson gson = new Gson();
+        JsonReader reader = new JsonReader(new FileReader(f));
+        java.lang.reflect.Type type = new TypeToken<Map<String, ServerConfig>>(){}.getType();
+        Map<String, ServerConfig> map = gson.fromJson(reader, type);
+        return map.get(selectedServer).getNumGPU();
     }
 
     public void log(String s) {

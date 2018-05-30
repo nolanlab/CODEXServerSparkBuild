@@ -120,7 +120,11 @@ public class MakeMontage {
                 ImagePlus stack = new Concatenator().concatenate(singlePlane,false);
                 ImagePlus out = mm.makeMontage2(stack, maxX,maxY,1.0/factor,1,stackSize,1,0,false);
                 String title = singlePlane[0].getTitle();
-                IJ.save(out, mkMonDir+File.separator+String.format("reg%03d",reg)+File.separator+"montage_"+regString+title.substring(title.indexOf("_t"),title.indexOf("_t")+5)+title.substring(title.indexOf("_c"),title.indexOf("_c")+5));
+                File regDir = new File(mkMonDir+File.separator+String.format("reg%03d",reg));
+                if(!regDir.exists()) {
+                    regDir.mkdir();
+                }
+                IJ.save(out, regDir + File.separator + "montage_" + regString + title.substring(title.indexOf("_t"),title.indexOf("_t")+5) + title.substring(title.indexOf("_c"),title.indexOf("_c")+5));
             }
         }
 

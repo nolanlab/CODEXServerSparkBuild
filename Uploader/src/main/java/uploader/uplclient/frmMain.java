@@ -13,8 +13,8 @@ import ij.ImagePlus;
 import ij.io.Opener;
 import ij.plugin.ZProjector;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.nolanlab.CODEX.driffta.Experiment;
 import org.nolanlab.CODEX.utils.codexhelper.ExperimentHelper;
 import uploader.uplclient.microscope.Microscope;
@@ -547,6 +547,9 @@ public class frmMain extends JFrame {
                         f.renameTo(new File(dir + File.separator + s[0] + "_" + s[1]));
                     }
                 }
+
+
+
                 File f = new File(".\\");
 
                 f.getAbsolutePath();
@@ -565,11 +568,11 @@ public class frmMain extends JFrame {
 //                }
 
                 String selectedServer = experimentView.getServerName().getSelectedItem().toString();
-                File serverConfigJson = new File("C:\\Users\\Nikolay\\IdeaProjects\\CODEXServer\\out\\artifacts\\CODEXServer_jar\\serverConfig.json");
-                String upC = loadUploaderCacheFromJson(serverConfigJson, selectedServer);
+//                File serverConfigJson = new File("serverconfig.json");
+                String upC = "codex_server_uploader_cache";
 
-                File uploaderJson = new File("C:\\Users\\Nikolay\\IdeaProjects\\CODEXServer_Spark_rebuild\\out\\artifacts\\Uploader_jar\\uploaderconfig.json");
-                String remoteIp = loadIpFromJson(uploaderJson, selectedServer);
+                File uploaderJson = new File("uploaderconfig.json");
+                String remoteIp = expHelper.loadIpFromJson(uploaderJson, selectedServer);
 
                 for (int reg : exp.getRegIdx()) {
                     for (int tile = 1; tile <= exp.getRegion_height() * exp.getRegion_width(); tile++) {
@@ -670,21 +673,21 @@ public class frmMain extends JFrame {
         }
     }
 
-    public String loadIpFromJson(File f, String selectedServer) throws FileNotFoundException {
-        Gson gson = new Gson();
-        JsonReader reader = new JsonReader(new FileReader(f));
-        java.lang.reflect.Type type = new TypeToken<Map<String, String>>(){}.getType();
-        Map<String, String> map = gson.fromJson(reader, type);
-        return map.get(selectedServer);
-    }
-
-    public String loadUploaderCacheFromJson(File f, String selectedServer) throws FileNotFoundException {
-        Gson gson = new Gson();
-        JsonReader reader = new JsonReader(new FileReader(f));
-        java.lang.reflect.Type type = new TypeToken<Map<String, ServerConfig>>(){}.getType();
-        Map<String, ServerConfig> map = gson.fromJson(reader, type);
-        return map.get(selectedServer).getUploaderCache();
-    }
+//    public String loadIpFromJson(File f, String selectedServer) throws FileNotFoundException {
+//        Gson gson = new Gson();
+//        JsonReader reader = new JsonReader(new FileReader(f));
+//        java.lang.reflect.Type type = new TypeToken<Map<String, String>>(){}.getType();
+//        Map<String, String> map = gson.fromJson(reader, type);
+//        return map.get(selectedServer);
+//    }
+//
+//    public String loadUploaderCacheFromJson(File f, String selectedServer) throws FileNotFoundException {
+//        Gson gson = new Gson();
+//        JsonReader reader = new JsonReader(new FileReader(f));
+//        java.lang.reflect.Type type = new TypeToken<Map<String, ServerConfig>>(){}.getType();
+//        Map<String, ServerConfig> map = gson.fromJson(reader, type);
+//        return map.get(selectedServer).getUploaderCache();
+//    }
 
 
     public ExperimentView getExperimentView() {

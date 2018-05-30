@@ -47,10 +47,19 @@ public class Driffta {
         //Specify the serverConfig
         String serverConfig = RscCodexController.getServerHomeDir() + File.separator + "data";
 
-        Properties config = new Properties();
-        config.load(new FileInputStream(System.getProperty("user.home") + File.separator + "config.txt"));
-        final String TMP_SSD_DRIVE = config.get("TMP_SSD_DRIVE").toString();
-        final String numGPUs = config.get("numGPU").toString();
+//        Properties config = new Properties();
+//        config.load(new FileInputStream(System.getProperty("user.home") + File.separator + "config.txt"));
+//        final String TMP_SSD_DRIVE = config.get("TMP_SSD_DRIVE").toString();
+//        final String numGPUs = config.get("numGPU").toString();
+
+        String selectedServer = "Left";
+        String TMP_SSD_DRIVE = "";
+        String numGPUs = "";
+        File serverConfigJson = new File("serverconfig.json");
+        if("Left".equals(selectedServer)) {
+            TMP_SSD_DRIVE = expHelper.loadUploaderCacheFromJson(serverConfigJson, selectedServer);
+            numGPUs = String.valueOf(expHelper.loadNumGpuFromJson(serverConfigJson, selectedServer));
+        }
 
         String baseDir = TMP_SSD_DRIVE + File.separator + user + File.separator + expName;
         String outDir = serverConfig + File.separator + user + File.separator + expName + File.separator + "processed" + File.separator + "tiles";

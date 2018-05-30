@@ -4,11 +4,11 @@
 /*      */ import java.awt.Graphics2D;
 /*      */ import java.awt.Point;
 /*      */ import java.awt.Shape;
-/*      */ import java.awt.geom.Line2D.Double;
+/*      */ import java.awt.geom.Line2D;
+import java.awt.geom.Line2D.Double;
 /*      */ import java.awt.geom.Point2D;
-/*      */ import java.awt.geom.Point2D.Double;
+/*      */
 /*      */ import java.awt.geom.Rectangle2D;
-/*      */ import java.awt.geom.Rectangle2D.Double;
 /*      */ import java.io.Serializable;
 /*      */ import java.util.ArrayList;
 /*      */ import java.util.Arrays;
@@ -303,10 +303,10 @@
 /*  303 */     this.yScale = 1;
 /*  304 */     this.xScaleArgument = "";
 /*  305 */     this.yScaleArgument = "";
-/*  306 */     this.xMin = NaN.0D;
-/*  307 */     this.xMax = NaN.0D;
-/*  308 */     this.yMin = NaN.0D;
-/*  309 */     this.yMax = NaN.0D;
+/*  306 */     this.xMin = java.lang.Double.POSITIVE_INFINITY;
+/*  307 */     this.xMax = java.lang.Double.NEGATIVE_INFINITY;
+/*  308 */     this.yMin = java.lang.Double.POSITIVE_INFINITY;
+/*  309 */     this.yMax = java.lang.Double.NEGATIVE_INFINITY;
 /*  310 */     this.globalP = true;
 /*  311 */     this.standAloneP = false;
 /*  312 */     this.localP = false;
@@ -402,10 +402,10 @@
 /*  402 */     this.yScale = 1;
 /*  403 */     this.xScaleArgument = null;
 /*  404 */     this.yScaleArgument = null;
-/*  405 */     this.xMin = NaN.0D;
-/*  406 */     this.xMax = NaN.0D;
-/*  407 */     this.yMin = NaN.0D;
-/*  408 */     this.yMax = NaN.0D;
+/*  405 */     this.xMin = java.lang.Double.POSITIVE_INFINITY;
+/*  406 */     this.xMax = java.lang.Double.NEGATIVE_INFINITY;
+/*  407 */     this.yMin = java.lang.Double.POSITIVE_INFINITY;
+/*  408 */     this.yMax = java.lang.Double.NEGATIVE_INFINITY;
 /*      */     
 /*      */ 
 /*  411 */     this.globalP = true;
@@ -581,9 +581,7 @@
 /*      */ 
 /*      */ 
 /*      */ 
-/*      */   /**
-/*      */    * @deprecated
-/*      */    */
+/*      */
 /*      */   public int getAxisBins()
 /*      */   {
 /*  589 */     return this.xBins;
@@ -2248,64 +2246,7 @@
 /*      */ 
 /* 2249 */     return gateArray;
 /*      */   }
-/*      */   
-/*      */   public static Gate copy(int newID, Gate gate) {
-/* 2253 */     if (gate == null) {
-/* 2254 */       return null;
-/*      */     }
-/*      */     
-/*      */     Gate copy;
-/*      */     Gate copy;
-/* 2259 */     if ((gate instanceof Ellipse)) {
-/* 2260 */       Ellipse ellipse = (Ellipse)gate;
-/* 2261 */       copy = new Ellipse(newID, ellipse.getDoubleX(), ellipse.getDoubleY(), ellipse.getMajor(), ellipse.getMinor(), ellipse.getAngle(), ellipse.getXChannel(), ellipse.getYChannel(), ellipse.getCompensationID(), ellipse.getXBins(), ellipse.getYBins(), ellipse.getXSize(), ellipse.getYSize()); } else { Gate copy;
-/* 2262 */       if ((gate instanceof Polygon)) {
-/* 2263 */         Polygon polygon = (Polygon)gate;
-/* 2264 */         Point[] points = polygon.getPoints();
-/* 2265 */         copy = new Polygon(newID, Arrays.asList(points), polygon.getXChannel(), polygon.getYChannel(), polygon.getCompensationID(), polygon.getXBins(), polygon.getYBins(), polygon.getXSize(), polygon.getYSize());
-/*      */       } else { Gate copy;
-/* 2267 */         if ((gate instanceof Rectangle)) {
-/* 2268 */           Rectangle rectangle = (Rectangle)gate;
-/* 2269 */           copy = new Rectangle(newID, rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight(), rectangle.getXChannel(), rectangle.getYChannel(), rectangle.getCompensationID(), rectangle.getXBins(), rectangle.getYBins(), rectangle.getXSize(), rectangle.getYSize());
-/*      */         } else { Gate copy;
-/* 2271 */           if ((gate instanceof Quadrant)) {
-/* 2272 */             Quadrant quadrant = (Quadrant)gate;
-/* 2273 */             copy = new Quadrant(newID, quadrant.getX(), quadrant.getY(), quadrant.getWidth(), quadrant.getHeight(), quadrant.getXChannel(), quadrant.getYChannel(), quadrant.getCompensationID(), quadrant.getXBins(), quadrant.getYBins(), quadrant.getXSize(), quadrant.getYSize());
-/*      */           } else { Gate copy;
-/* 2275 */             if ((gate instanceof Range)) {
-/* 2276 */               Range range = (Range)gate;
-/* 2277 */               copy = new Range(newID, range.getX(), range.getY(), range.getWidth(), range.getHeight(), range.getXChannel(), range.getCompensationID(), range.getXBins(), range.getXSize());
-/*      */             } else { Gate copy;
-/* 2279 */               if ((gate instanceof Split)) {
-/* 2280 */                 Split split = (Split)gate;
-/* 2281 */                 copy = new Split(newID, split.getX(), split.getY(), split.getWidth(), split.getHeight(), split.getXChannel(), split.getCompensationID(), split.getXBins(), split.getXSize());
-/*      */               }
-/*      */               else {
-/* 2284 */                 copy = null;
-/*      */               }
-/*      */             } } } } }
-/* 2287 */     if (copy != null)
-/*      */     {
-/*      */ 
-/* 2290 */       copy.setName(gate.getName());
-/*      */       
-/*      */ 
-/* 2293 */       copy.setXScaleFlag(gate.getXScaleFlag());
-/* 2294 */       copy.setYScaleFlag(gate.getYScaleFlag());
-/* 2295 */       copy.setXScaleArgumentString(gate.getXScaleArgumentString());
-/* 2296 */       copy.setYScaleArgumentString(gate.getYScaleArgumentString());
-/* 2297 */       copy.setXMinimum(gate.getXMinimum());
-/* 2298 */       copy.setXMaximum(gate.getXMaximum());
-/* 2299 */       copy.setYMinimum(gate.getYMinimum());
-/* 2300 */       copy.setYMaximum(gate.getYMaximum());
-/*      */       
-/*      */ 
-/* 2303 */       copy.setLabelX(gate.getLabelX());
-/* 2304 */       copy.setLabelY(gate.getLabelY());
-/*      */     }
-/*      */     
-/* 2307 */     return copy;
-/*      */   }
+/*      */
 /*      */   
 /*      */   public String toString() {
 /* 2311 */     StringBuffer sb = new StringBuffer();
