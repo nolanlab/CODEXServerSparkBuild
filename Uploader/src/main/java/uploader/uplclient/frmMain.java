@@ -6,8 +6,6 @@
 package uploader.uplclient;
 
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.io.Opener;
@@ -34,8 +32,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
-
-import com.google.gson.reflect.TypeToken;
 
 
 /**
@@ -548,8 +544,6 @@ public class frmMain extends JFrame {
                     }
                 }
 
-
-
                 File f = new File(".\\");
 
                 f.getAbsolutePath();
@@ -560,15 +554,7 @@ public class frmMain extends JFrame {
 
                 int currCnt = 1;
 
-//                Properties config = new Properties();
-//                config.load(new FileInputStream(System.getProperty("user.home")+File.separator+"config.txt"));
-//                String upC = "";
-//                if(config.toString().contains("TMP_SSD_DRIVE") && !StringUtils.isEmpty(config.get("TMP_SSD_DRIVE").toString())) {
-//                    upC = config.get("TMP_SSD_DRIVE").toString().replaceAll(":", "");
-//                }
-
                 String selectedServer = experimentView.getServerName().getSelectedItem().toString();
-//                File serverConfigJson = new File("serverconfig.json");
                 String upC = "codex_server_uploader_cache";
 
                 File uploaderJson = new File("uploaderconfig.json");
@@ -585,10 +571,6 @@ public class frmMain extends JFrame {
                         frmMain.this.repaint();
                     }
                 }
-
-//                Check if best focus was already created from Driffta, if not create bestFocus folder
-//                UploaderClient runBf = new UploaderClient("http://localhost:4567", "runBestFocus?user="+po.getUsername()+"&exp="+exp.getName());
-//                log(runBf.getResponse());
 
                 log("Creating montages");
                 UploaderClient mkMontage = new UploaderClient("http://" + remoteIp + ":4567", "makeMontage?user="+exp.getUserName()+"&exp="+exp.getName()+"&fc=2");
@@ -672,23 +654,6 @@ public class frmMain extends JFrame {
             copyFileFromSourceToDest(expTimesJSON, dest);
         }
     }
-
-//    public String loadIpFromJson(File f, String selectedServer) throws FileNotFoundException {
-//        Gson gson = new Gson();
-//        JsonReader reader = new JsonReader(new FileReader(f));
-//        java.lang.reflect.Type type = new TypeToken<Map<String, String>>(){}.getType();
-//        Map<String, String> map = gson.fromJson(reader, type);
-//        return map.get(selectedServer);
-//    }
-//
-//    public String loadUploaderCacheFromJson(File f, String selectedServer) throws FileNotFoundException {
-//        Gson gson = new Gson();
-//        JsonReader reader = new JsonReader(new FileReader(f));
-//        java.lang.reflect.Type type = new TypeToken<Map<String, ServerConfig>>(){}.getType();
-//        Map<String, ServerConfig> map = gson.fromJson(reader, type);
-//        return map.get(selectedServer).getUploaderCache();
-//    }
-
 
     public ExperimentView getExperimentView() {
         return experimentView;

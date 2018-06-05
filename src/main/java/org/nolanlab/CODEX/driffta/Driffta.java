@@ -6,6 +6,9 @@
 package org.nolanlab.CODEX.driffta;
 
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import fiji.stacks.Hyperstack_rearranger;
 import ij.*;
 import ij.plugin.*;
@@ -14,6 +17,7 @@ import ij.process.LUT;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.nolanlab.CODEX.controller.RscCodexController;
+import org.nolanlab.CODEX.utils.ServerConfig;
 import org.nolanlab.CODEX.utils.codexhelper.BestFocusHelper;
 import org.nolanlab.CODEX.utils.codexhelper.ExperimentHelper;
 import org.nolanlab.CODEX.utils.logger;
@@ -21,6 +25,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.awt.*;
 import java.io.*;
+import java.lang.reflect.Type;
 import java.util.*;
 import java.util.List;
 
@@ -39,6 +44,14 @@ public class Driffta {
     private static LinkedHashMap<String, Integer> tileVsBf = new LinkedHashMap<>();
     private static PrintStream logStream;
 
+    public static Map<String, ServerConfig> loadServerConfigFromJson(File f) throws FileNotFoundException {
+        Gson gson = new Gson();
+        JsonReader reader = new JsonReader(new FileReader(f));
+        Type type = new TypeToken<Map<String, ServerConfig>>(){}.getType();
+        Map<String, ServerConfig> map = gson.fromJson(reader, type);
+        return map;
+    }
+
     public static void drifftaProcessing(String user, String expName, String r, String t) throws Exception {
 
         ExperimentHelper expHelper = new ExperimentHelper();
@@ -47,18 +60,13 @@ public class Driffta {
         //Specify the serverConfig
         String serverConfig = RscCodexController.getServerHomeDir() + File.separator + "data";
 
-//        Properties config = new Properties();
-//        config.load(new FileInputStream(System.getProperty("user.home") + File.separator + "config.txt"));
-//        final String TMP_SSD_DRIVE = config.get("TMP_SSD_DRIVE").toString();
-//        final String numGPUs = config.get("numGPU").toString();
-
-        String selectedServer = "Left";
         String TMP_SSD_DRIVE = "";
         String numGPUs = "";
         File serverConfigJson = new File("serverconfig.json");
-        if("Left".equals(selectedServer)) {
-            TMP_SSD_DRIVE = expHelper.loadUploaderCacheFromJson(serverConfigJson, selectedServer);
-            numGPUs = String.valueOf(expHelper.loadNumGpuFromJson(serverConfigJson, selectedServer));
+        Map<String, ServerConfig> serverVsConfig = loadServerConfigFromJson(serverConfigJson);
+        for(Map.Entry<String, ServerConfig> hm : serverVsConfig.entrySet()) {
+                TMP_SSD_DRIVE = expHelper.loadUploaderCacheFromJson(serverConfigJson, hm.getKey());
+                numGPUs = String.valueOf(expHelper.loadNumGpuFromJson(serverConfigJson, hm.getKey()));
         }
 
         String baseDir = TMP_SSD_DRIVE + File.separator + user + File.separator + expName;
