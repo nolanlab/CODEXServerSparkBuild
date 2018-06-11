@@ -1,8 +1,9 @@
 /*     */ package org.nolanlab.CODEX.viewer.viewerclient.gate;
 /*     */ 
 /*     */ import java.util.HashMap;
-/*     */ import org.jdom.Element;
-/*     */ 
+/*     */ import org.jdom2.Element;
+
+/*     */
 /*     */ 
 /*     */ 
 /*     */ 

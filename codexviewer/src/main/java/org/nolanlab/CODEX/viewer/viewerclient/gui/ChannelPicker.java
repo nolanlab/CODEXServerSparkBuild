@@ -7,19 +7,24 @@ import ij.gui.ImageRoi;
 import ij.gui.Overlay;
 import ij.process.LUT;
 import org.apache.commons.io.FilenameUtils;
+import org.nolanlab.CODEX.utils.logger;
 import org.nolanlab.CODEX.viewer.viewerclient.i5d.MultiCompositeImage;
 
 import javax.swing.*;
 
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * 
+ *
  * @author Vishal
  *
  */
@@ -48,7 +53,7 @@ public class ChannelPicker extends JPanel {
 		currentChannel = img.getC();
 		nChannels = img.getNChannels();
 
-		//Initialize all channels to black color when loading the i5d image on viewer. 
+		//Initialize all channels to black color when loading the i5d image on viewer.
 		for (int i = 0; i < img.getNChannels(); i++) {
 			img.setActiveChannel(i,false,false);
 		}
@@ -59,19 +64,19 @@ public class ChannelPicker extends JPanel {
 
 
 		Checkbox arr[][] = new Checkbox[img.getNChannels()][3];
-		
+
 		//Layout preferences
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
+
 		//Initialize all components & overlay if present
 		initComponents(arr);
 		initOverlay();
-        img.updateAndDraw();
-    }
+		img.updateAndDraw();
+	}
 
 
 
-	
+
 	/**
 	 * If overlay is present, add to the image5d object
 	 * Create a new slider to adjust opacity of overlay object
@@ -84,7 +89,7 @@ public class ChannelPicker extends JPanel {
 		if(img != null) {
 			File dir = null; //new File(i5d.getFileLocation());
 			File[] regFiles = dir.getParentFile().listFiles(t -> t.getName().contains("regions_"+ FilenameUtils.removeExtension(dir.getName())));
-			if(regFiles != null && regFiles.length != 0) {				
+			if(regFiles != null && regFiles.length != 0) {
 				opacityLabel = new Label();
 				opacityLabel.setText("Adjust overlay opacity");
 				opacityLabel.setPreferredSize(new Dimension(25, 10));
@@ -106,7 +111,7 @@ public class ChannelPicker extends JPanel {
 					overlay.add(imgRoi);
 				}
 				img.setOverlay(overlay);
-				
+
 				opacitySlider.addChangeListener(e -> {
 					JSlider sl = (JSlider) e.getSource();
 					es.submit(new Runnable() {
@@ -124,10 +129,10 @@ public class ChannelPicker extends JPanel {
 					});
 				});
 				this.add(opacitySlider);
-		  	}
+			}
 		}
 	}
-	
+
 
 	@Override
 	public Dimension getPreferredSize() {
@@ -144,28 +149,43 @@ public class ChannelPicker extends JPanel {
 
 		for (int i = 0; i < img.getNChannels(); i++) {
 			Panel smallP = new Panel();
-			
+
 			//Checkboxes for RGB
+			//grayCb = new Checkbox();
 			redCb = new Checkbox();
 			greenCb = new Checkbox();
 			blueCb = new Checkbox();
 
+			//grayCb.setLabel("W");
 			redCb.setLabel("R");
 			greenCb.setLabel("G");
 			blueCb.setLabel("B");
 
 			//Number of checkboxes based on input image channels
+			//arr[i][0] = grayCb;
 			arr[i][0] = redCb;
 			arr[i][1] = greenCb;
 			arr[i][2] = blueCb;
 
 			final int j = i;
-			
+/*
+			grayCb.addItemListener(e -> {
+				boolean selected = e.getStateChange() == ItemEvent.SELECTED;
+				img.setActiveChannel(j,selected,true);
+				if (selected) {
+					adjustRowColors(arr, j, 0);
+					adjustColumnColors(arr, j, 0);
+					img.setChannelLut(LUT.createLutFromColor(Color.WHITE), j+1);
+				}
+				img.updateAndRepaintWindow();
+			});
+			*/
+
 			//Item listeners to capture select and deselect of RGB checkboxes
 			redCb.addItemListener(e -> {
-                boolean selected = e.getStateChange() == ItemEvent.SELECTED;
-                img.setActiveChannel(j,selected,true);
-                if (selected) {
+				boolean selected = e.getStateChange() == ItemEvent.SELECTED;
+				img.setActiveChannel(j,selected,true);
+				if (selected) {
 					adjustRowColors(arr, j, 0);
 					adjustColumnColors(arr, j, 0);
 					img.setChannelLut(LUT.createLutFromColor(Color.RED), j+1);
@@ -174,27 +194,27 @@ public class ChannelPicker extends JPanel {
 			});
 
 			greenCb.addItemListener(e -> {
-			    boolean selected = e.getStateChange() == ItemEvent.SELECTED;
-                img.setActiveChannel(j,selected,true);
+				boolean selected = e.getStateChange() == ItemEvent.SELECTED;
+				img.setActiveChannel(j,selected,true);
 				if (selected) {
 					adjustRowColors(arr, j, 1);
 					adjustColumnColors(arr, j, 1);
-                    img.setChannelLut(LUT.createLutFromColor(Color.GREEN), j+1);
+					img.setChannelLut(LUT.createLutFromColor(Color.GREEN), j+1);
 				}
 				img.updateAndRepaintWindow();
 			});
 
 			blueCb.addItemListener(e -> {
-                boolean selected = e.getStateChange() == ItemEvent.SELECTED;
-                img.setActiveChannel(j,selected,true);
-                if (selected) {
-                    adjustRowColors(arr, j, 2);
+				boolean selected = e.getStateChange() == ItemEvent.SELECTED;
+				img.setActiveChannel(j,selected,true);
+				if (selected) {
+					adjustRowColors(arr, j, 2);
 					adjustColumnColors(arr, j, 2);
-                    img.setChannelLut(LUT.createLutFromColor(Color.BLUE), j+1);
+					img.setChannelLut(LUT.createLutFromColor(Color.BLUE), j+1);
 				}
 				img.updateAndRepaintWindow();
 			});
-			
+
 			//Add a range slider after checkbox
 			slider = new RangeSlider();
 			slider.setMinimum(0);
@@ -206,16 +226,26 @@ public class ChannelPicker extends JPanel {
 			slider.setPreferredSize(new Dimension(250,20));
 			slider.setOpaque(false);
 
+			final AtomicLong al = new AtomicLong(System.currentTimeMillis());
+
+
 			slider.addChangeListener(e -> {
-//				if (slider.getValueIsAdjusting())
-//					return;
+//
 				RangeSlider rs = (RangeSlider) e.getSource();
+				if (rs.getValueIsAdjusting()){
+					return;
+				}
 				es.submit(new Runnable() {
 					@Override
 					public void run() {
-						img.setC(j + 1);
-                        img.setDisplayRange(rs.getValue(), rs.getUpperValue());
-                        img.updateAndRepaintWindow();
+
+						if(System.currentTimeMillis()-al.get() > 1000) {
+							img.setC(j + 1);
+							img.setDisplayRange(rs.getValue(), rs.getUpperValue());
+							img.updateAndRepaintWindow();
+						}else{
+							al.set(System.currentTimeMillis());
+						}
 					}
 				});
 			});
@@ -225,12 +255,15 @@ public class ChannelPicker extends JPanel {
 			smallP.add(greenCb);
 			smallP.add(blueCb);
 			smallP.add(slider);
+
+			logger.print("label for " + i +",   "+ img.getStack().getSliceLabel(i+1));
+			smallP.add(new JLabel(img.getStack().getSliceLabel(i+1)));
 			smallP.setPreferredSize(new Dimension(300, 5));
 			this.add(smallP);
 		}
 
-        this.setPreferredSize(new Dimension(300,arr.length*20));
-        this.setMinimumSize(new Dimension(300,arr.length*20));
+		this.setPreferredSize(new Dimension(300,arr.length*20));
+		this.setMinimumSize(new Dimension(300,arr.length*20));
 	}
 
 	/**
@@ -250,7 +283,7 @@ public class ChannelPicker extends JPanel {
 	}
 
 	/**
-	 * Update the values of checkbox selection based on col 
+	 * Update the values of checkbox selection based on col
 	 * @param matrix
 	 * @param r
 	 * @param c
@@ -270,18 +303,18 @@ public class ChannelPicker extends JPanel {
 	public void setColor(Color c) {
 
 	}
-	
+
 	public Label getChannelParametersLabel() {
 		return channelParametersLabel;
 	}
-	
+
 	public Label getOpacityLabel() {
 		return opacityLabel;
 	}
-	
+
 	public JSlider getOpacitySlider() {
 		return opacitySlider;
 	}
-	
-	
+
+
 }

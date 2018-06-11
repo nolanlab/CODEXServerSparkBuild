@@ -23,6 +23,10 @@ public class ExperimentWrapper {
         return  new File(root.getAbsolutePath()+ File.separator+"processed" + File.separator+"tiles");
     }
 
+    public File getChannelNamesFile (){
+        return  new File(root.getAbsolutePath()+  File.separator+"channelNames.txt");
+    }
+
     public File getStitchedBaseFolder (){
         return  new File(root.getAbsolutePath()+ File.separator+"processed" + File.separator+"stitched");
     }

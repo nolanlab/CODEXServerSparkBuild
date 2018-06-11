@@ -3,8 +3,10 @@
 /*     */ import java.util.HashMap;
 /*     */ import java.util.Iterator;
 /*     */ import java.util.List;
-/*     */ import org.jdom.Element;
-/*     */ 
+/*     */ import org.jdom2.Element;
+import org.jdom2.Element;
+
+/*     */
 /*     */ 
 /*     */ 
 /*     */ 
@@ -304,7 +306,6 @@
 /*     */     {
 /*     */       GateSet gateSet;
 /*     */       
-/*     */       GateSet gateSet;
 /* 308 */       if (type.equals("CompensationGateSet"))
 /*     */       {
 /*     */ 

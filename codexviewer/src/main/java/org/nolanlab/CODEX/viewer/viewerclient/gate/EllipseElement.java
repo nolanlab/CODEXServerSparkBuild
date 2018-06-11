@@ -232,7 +232,7 @@
 /*     */     }
 /*     */     
 /*     */ 
-/* 235 */     return new Ellipse(id, x, y, major, minor, angle, xChannel, yChannel, compensationID, xBins, yBins, xSize, ySize);
+/* 235 */     return new Ellipse(id, x, y, major, minor, angle, xChannel, yChannel, -1, xBins, yBins, xSize, ySize);
 /*     */   }
 /*     */ }
 

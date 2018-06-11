@@ -54,10 +54,10 @@ import java.util.Arrays;
 /*      */ 
 /*      */   public Ellipse(int id, int bins, double doubleX, double doubleY, double major, double minor, double angle, int xChannel, int yChannel)
 /*      */   {
-/*  218 */     this(id, doubleX, doubleY, major, minor, angle, xChannel, yChannel, bins, bins, bins, bins);
+/*  218 */     this(id, doubleX, doubleY, major, minor, angle, xChannel, yChannel, -1, bins, bins, bins, bins);
 /*      */   }
 
-/*      */   public Ellipse(int id, double doubleX, double doubleY, double major, double minor, double angle, int xChannel, int yChannel, int xBins, int yBins, int xSize, int ySize)
+/*      */   public Ellipse(int id, double doubleX, double doubleY, double major, double minor, double angle, int xChannel, int yChannel, int compID, int xBins, int yBins, int xSize, int ySize)
 /*      */   {
 /*  265 */     super(id, (int)doubleX, (int)doubleY, (int)major, (int)minor, xChannel, yChannel, -1, xBins, yBins, xSize, ySize);
 /*      */     

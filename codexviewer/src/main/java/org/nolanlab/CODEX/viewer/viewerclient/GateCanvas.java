@@ -313,7 +313,7 @@ import org.nolanlab.CODEX.viewer.viewerclient.i5d.GateClient;
 /*  681 */     int axisBins = this.client.getAxisBins();
 /*      */     
 /*      */ 
-/*  684 */     return new Ellipse(this.client.getNextGateID(), point.getX(), point.getY(), (int)major, (int)minor, angle, getXChannel(), getYChannel(),  axisBins, axisBins, axisBins, axisBins);
+/*  684 */     return new Ellipse(this.client.getNextGateID(), point.getX(), point.getY(), (int)major, (int)minor, angle, getXChannel(), getYChannel(), -1,  axisBins, axisBins, axisBins, axisBins);
 /*      */   }
 
 /*      */ 
