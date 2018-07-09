@@ -11,6 +11,7 @@ import org.nolanlab.CODEX.driffta.Experiment;
 import org.nolanlab.CODEX.segm.segmclient.SegConfigParam;
 import org.nolanlab.CODEX.utils.codexhelper.ExperimentHelper;
 import org.nolanlab.CODEX.utils.codexhelper.SegmHelper;
+import org.nolanlab.CODEX.utils.logger;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -18,12 +19,51 @@ import java.util.*;
 
 public class RunSegm {
 
-    private SegmHelper segmHelper = new SegmHelper();
-    private int totalFolder;
-    private int progress = 0;
+    private static SegmHelper segmHelper = new SegmHelper();
+    private int overallProgress;
 
-    public void runSeg(SegConfigParam segParam) throws Exception {
+    public static void main(String[] args) throws Exception {
         int tile=0;
+        int totalFolder;
+
+        SegConfigParam segParam = new SegConfigParam();
+        RunSegm runSegm = new RunSegm();
+
+        segParam.setSegmName(args[0]);
+        segParam.setRootDir(new File(args[1]));
+        segParam.setShowImage(Boolean.parseBoolean(args[2]));
+        segParam.setRadius(Integer.parseInt(args[3]));
+        segParam.setUse_membrane(Boolean.parseBoolean(args[4]));
+        segParam.setMaxCutoff(Double.parseDouble(args[5]));
+        segParam.setMinCutoff(Double.parseDouble(args[6]));
+        segParam.setRelativeCutoff(Double.parseDouble(args[7]));
+        segParam.setNuclearStainChannel(Integer.parseInt(args[8]));
+        segParam.setNuclearStainCycle(Integer.parseInt(args[9]));
+        segParam.setMembraneStainChannel(Integer.parseInt(args[10]));
+        segParam.setMembraneStainCycle(Integer.parseInt(args[11]));
+        segParam.setInner_ring_size(Double.parseDouble(args[12]));
+        segParam.setCount_puncta(Boolean.parseBoolean(args[13]));
+        segParam.setDont_inverse_memb(Boolean.parseBoolean(args[14]));
+        segParam.setConcentricCircles(Integer.parseInt(args[15]));
+        segParam.setDelaunay_graph(Boolean.parseBoolean(args[16]));
+
+        logger.print("Parameters as seen from the browser: ");
+        logger.print("Input dir: " + segParam.getRootDir().getPath());
+        logger.print("showImage: "+ segParam.isShowImage());
+        logger.print("radius: " + segParam.getRadius());
+        logger.print("use_Membrane: " + segParam.isUse_membrane());
+        logger.print("maxCutOff: " + segParam.getMaxCutoff());
+        logger.print("minCutOff: " + segParam.getMinCutoff());
+        logger.print("relativeCutOff: " + segParam.getRelativeCutoff());
+        logger.print("nucStainChannel: " + segParam.getNuclearStainChannel());
+        logger.print("nucStainCycle: " + segParam.getNuclearStainCycle());
+        logger.print("membStainChannel: " + segParam.getMembraneStainChannel());
+        logger.print("membStainCycle: " + segParam.getMembraneStainCycle());
+        logger.print("inner ring size: " + segParam.getInner_ring_size());
+        logger.print("count puncta: " + segParam.isCount_puncta());
+        logger.print("dont_inverse_memb: " + segParam.isDont_inverse_memb());
+        logger.print("concentric circles: " +segParam.getConcentricCircles());
+        logger.print("delaunay graph: "+ segParam.isDelaunay_graph());
 
         File rootDir = segParam.getRootDir();
         if (!rootDir.exists()) {
@@ -44,9 +84,9 @@ public class RunSegm {
                     ImagePlus imp = fo.openFolder(regFolder[reg].getPath());
                     ImagePlus hyp = HyperStackConverter.toHyperStack(imp, exp.getChannel_names().length, exp.getNum_z_planes(), exp.getNum_cycles(), "default", "Composite");
                     segmentTiff(hyp, ++tile, segParam);
-                    this.setProgress(calculateProgress(reg+1));
+                    runSegm.setProgress(runSegm.calculateProgress(reg+1, totalFolder));
                     if(reg+1 == totalFolder) {
-                        progress=0;
+                        runSegm.setProgress(0);
                     }
                 }
             }
@@ -58,7 +98,7 @@ public class RunSegm {
         segmHelper.saveToFile(segParam, segJsonOut);
     }
 
-    private void segmentTiff(ImagePlus imp, int tile, SegConfigParam segConfigParam) throws Exception {
+    private static void segmentTiff(ImagePlus imp, int tile, SegConfigParam segConfigParam) throws Exception {
         Duplicator dup = new Duplicator();
         int j;
         int i;
@@ -344,23 +384,15 @@ public class RunSegm {
         }
     }
 
-    private int calculateProgress(int reg) {
+    private int calculateProgress(int reg, int totalFolder) {
         return reg*100/totalFolder;
     }
 
     public int getProgress() {
-        return progress;
+        return overallProgress;
     }
 
-    public void setProgress(int progress) {
-        this.progress = progress;
-    }
-
-    public int getTotalFolder() {
-        return totalFolder;
-    }
-
-    public void setTotalFolder(int totalFolder) {
-        this.totalFolder = totalFolder;
+    public void setProgress(int prog) {
+        overallProgress = prog;
     }
 }

@@ -413,6 +413,7 @@ public class ExperimentView extends javax.swing.JPanel {
         });
         jPanel4.add(val18);
 
+        val19.setText("30");
         val19.setInputVerifier(integerVerifier);
         val19.setInputVerifier(integerVerifier);
         val19.setMaximumSize(new java.awt.Dimension(3000, 20));
@@ -425,6 +426,7 @@ public class ExperimentView extends javax.swing.JPanel {
         });
         jPanel4.add(val19);
 
+        val20.setText("30");
         val20.setInputVerifier(integerVerifier);
         val20.setMaximumSize(new java.awt.Dimension(3000, 20));
         val20.setMinimumSize(new java.awt.Dimension(300, 20));
@@ -1232,14 +1234,16 @@ public class ExperimentView extends javax.swing.JPanel {
 
         //Calculate tile overlap
         if(dir != null) {
-            for (File cyc : dir.listFiles()) {
+            File [] dirList = dir.listFiles();
+            outer: for (File cyc : dirList) {
                 if (cyc != null && cyc.isDirectory() && cyc.getName().toLowerCase().startsWith("cyc")) {
-                    for(File file : cyc.listFiles()) {
+                    File [] cycList = cyc.listFiles();
+                    for(File file : cycList) {
                         if(!file.isDirectory() && (file.getName().endsWith(".tif")||file.getName().endsWith(".tiff"))){
                             ImagePlus imp = IJ.openImage(file.getAbsolutePath());
                             val19.setText(String.valueOf(exp.getTile_overlap_X() * 100/imp.getWidth()));
                             val20.setText(String.valueOf(exp.getTile_overlap_Y() * 100/imp.getHeight()));
-                            break;
+                            break outer;
                         }
                     }
                 }

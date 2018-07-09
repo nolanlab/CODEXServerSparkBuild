@@ -33,6 +33,8 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
 
+import static org.nolanlab.CODEX.driffta.Driffta.loadServerConfigFromJson;
+
 
 /**
  *
@@ -563,7 +565,23 @@ public class frmMain extends JFrame {
                 for (int reg : exp.getRegIdx()) {
                     for (int tile = 1; tile <= exp.getRegion_height() * exp.getRegion_width(); tile++) {
                         //serverconfig
-                        copyFileToServer(experimentView.getPath(), new File(File.separator + File.separator + remoteIp + File.separator + upC + File.separator + exp.getUserName() + File.separator + exp.getName()), reg, tile, exp);
+                        if(!remoteIp.equals("localhost")) {
+                            copyFileToServer(experimentView.getPath(), new File(File.separator + File.separator + remoteIp + File.separator + upC + File.separator + exp.getUserName() + File.separator + exp.getName()), reg, tile, exp);
+                        }
+                        else {
+                            //This is for localhost - Must have serverconfig.json
+                            File serverConfigJson = new File("serverconfig.json");
+                            if(serverConfigJson == null || !serverConfigJson.exists()) {
+                                throw new IllegalStateException("serverconfig.json does not exist to be run on localhost. Please include this and set the uploader cache value in the json and try again!");
+                            }
+                            else {
+                                Map<String, ServerConfig> serverVsConfig = loadServerConfigFromJson(serverConfigJson);
+                                for (Map.Entry<String, ServerConfig> hm : serverVsConfig.entrySet()) {
+                                    upC = expHelper.loadUploaderCacheFromJson(serverConfigJson, hm.getKey());
+                                }
+                                copyFileToServer(experimentView.getPath(), new File(upC + File.separator + exp.getUserName() + File.separator + exp.getName()), reg, tile, exp);
+                            }
+                        }
                         UploaderClient rnDiffta = new UploaderClient("http://" + remoteIp + ":4567", "runDriffta?user="+exp.getUserName()+"&exp="+exp.getName()+"&reg="+String.valueOf(reg)+"&tile="+String.valueOf(tile));
                         log(rnDiffta.getResponse());
                         log("Driffta done");

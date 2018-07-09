@@ -16,7 +16,6 @@ import ij.process.ImageConverter;
 import ij.process.LUT;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.nolanlab.CODEX.controller.RscCodexController;
 import org.nolanlab.CODEX.utils.ServerConfig;
 import org.nolanlab.CODEX.utils.codexhelper.BestFocusHelper;
 import org.nolanlab.CODEX.utils.codexhelper.ExperimentHelper;
@@ -52,13 +51,18 @@ public class Driffta {
         return map;
     }
 
-    public static void drifftaProcessing(String user, String expName, String r, String t) throws Exception {
+//    public static void drifftaProcessing(String user, String expName, String r, String t) throws Exception {
+    public static void main(String[] args) throws Exception {
+        String user = args[0];
+        String expName = args[1];
+        String r = args[2];
+        String t = args[3];
 
         ExperimentHelper expHelper = new ExperimentHelper();
         BestFocusHelper bfHelper = new BestFocusHelper();
 
         //Specify the serverConfig
-        String serverConfig = RscCodexController.getServerHomeDir() + File.separator + "data";
+        String serverConfig = args[4] + File.separator + "data";
 
         String TMP_SSD_DRIVE = "";
         String numGPUs = "";
@@ -290,6 +294,10 @@ public class Driffta {
                 //Create the bestFocus.json and store the imagesequence as key and the bestFocus z slice as value as a map in the json.
                 File bestFocusFile = new File(outDir + File.separator + "bestFocus.json");
                 tileVsBf.put(FilenameUtils.removeExtension(expHelper.getDestStackFileName(exp.getTiling_mode(), tile, region, exp.getRegion_width())), bestFocusPlanes[0]);
+                if(bestFocusFile.exists()) {
+                    Map<String, Integer> existingTileVsBf = bfHelper.load(bestFocusFile);
+                    tileVsBf.putAll(existingTileVsBf);
+                }
                 bfHelper.saveToFile(tileVsBf, bestFocusFile);
 
                 WindowManager.closeAllWindows();
@@ -300,17 +308,16 @@ public class Driffta {
                 log("All files opened. Deleting temporary dir");
                 delete(new File(baseDir));
             } catch (Exception e) {
-                e.printStackTrace();
-                if (logStream != null) {
-                    e.printStackTrace(logStream);
-                    logStream.flush();
-                    logStream.close();
-                }
-                System.exit(2);
+                logger.showException(e);
             }
         } else {
             log("Processed files already exist. Skipping driffta...");
-            delete(new File(baseDir));
+           try{
+               delete(new File(baseDir));
+           } catch (Exception e) {
+            e.printStackTrace();
+            logger.showException(e);
+        }
         }
     }
 
@@ -321,7 +328,7 @@ public class Driffta {
             }
         }
         if (f.exists() && !f.delete()) {
-            throw new IOException("File: " + f + " not removed. It is currently being used!");
+            throw new IOException("File: " + f + " was not removed. It is currently being used!");
         }
     }
 
@@ -606,7 +613,7 @@ public class Driffta {
 
         File expTimesFile = new File(baseDir + File.separator + "exposure_times.txt");
         if (!expTimesFile.exists()) {
-            throw new IllegalStateException("Processing Options JSON file not found: " + expTimesFile);
+            throw new IllegalStateException("exposure_times file not found: " + expTimesFile);
         }
 
         copyFileFromSourceToDest(chNamesFile, userExpDir);

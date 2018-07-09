@@ -2,16 +2,10 @@ package org.nolanlab.CODEX.controller;
 
 import com.google.gson.Gson;
 import ij.IJ;
-import org.nolanlab.CODEX.clustering.clsclient.ClusteringConfigParam;
 import org.nolanlab.CODEX.clustering.clsserver.ClusterConfig;
-import org.nolanlab.CODEX.clustering.clsserver.RunClustering;
 import org.nolanlab.CODEX.gating.gatingserver.*;
-import org.nolanlab.CODEX.segm.segmclient.SegConfigParam;
-import org.nolanlab.CODEX.segm.segmserver.ConcatenateResults;
-import org.nolanlab.CODEX.segm.segmserver.MakeFCS;
 import org.nolanlab.CODEX.segm.segmserver.RunSegm;
-import org.nolanlab.CODEX.driffta.Driffta;
-import org.nolanlab.CODEX.driffta.MakeMontage;
+import org.nolanlab.CODEX.utils.codexhelper.ExperimentHelper;
 import org.nolanlab.CODEX.utils.codexhelper.GatingHelper;
 import org.nolanlab.CODEX.utils.logger;
 
@@ -26,14 +20,15 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import static org.nolanlab.CODEX.driffta.Driffta.log;
 import static spark.Spark.*;
 
 public class RscCodexController {
 
     public static String serverHomeDir;
     private static RunSegm rs = new RunSegm();
-    private static RunClustering rc = new RunClustering();
     public static List<String> XYnames = new ArrayList<>();
+    public static ExperimentHelper expHelper = new ExperimentHelper();
 
     public static String getDataHomeDir() {
         return serverHomeDir+File.separator+"data";
@@ -43,12 +38,15 @@ public class RscCodexController {
         return serverHomeDir;
     }
 
+    public static void setServerHomeDir(String dir) {
+        serverHomeDir = dir;
+    }
+
 
 
     public static void main(String[] args) {
 
-       
-        serverHomeDir =args[0];
+        setServerHomeDir(args[0]);
         staticFiles.location("/public");
         staticFiles.externalLocation(args[0] + File.separator + "cache");
         staticFiles.externalLocation(getDataHomeDir());
@@ -81,22 +79,6 @@ public class RscCodexController {
         });
 
         //Uploader
-        post("/makeMontage", "application/octet-stream", (request, response) -> {
-            String user = request.queryParams("user");
-            String expName = request.queryParams("exp");
-            String factor = request.queryParams("fc");
-
-            try {
-                MakeMontage.createMontages(user, expName, factor);
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-                return e.fillInStackTrace().toString();
-            }
-
-            return "Montages created at: /" + user + File.separator + expName + "/processed/stitched";
-        });
-
         post("/runDriffta", "application/octet-stream", (request, response) -> {
             String user = request.queryParams("user");
             String expName = request.queryParams("exp");
@@ -104,14 +86,50 @@ public class RscCodexController {
             String tile = request.queryParams("tile");
 
             try {
-                Driffta.drifftaProcessing(user, expName, reg, tile);
+//                ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"C:\\Users\\Nikolay\\IdeaProjects\\CODEXServer_Spark_rebuild\\out\\artifacts\\CODEXServer_Spark_rebuild_jar\\CODEXServer.jar\" org.nolanlab.CODEX.driffta.Driffta \"" + user + "\" \"" + expName + "\" " + reg + " " + tile + " " + serverHomeDir);
+                ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"CODEXServer.jar\" org.nolanlab.CODEX.driffta.Driffta \"" + user + "\" \"" + expName + "\" " + reg + " " + tile + " " + serverHomeDir);
+                pb.redirectErrorStream(true);
+
+                log("Starting driffta in a new process: " + pb.command().toString());
+                Process proc = pb.start();
+
+                expHelper.waitAndPrint(proc);
+                log("Driffta process done");
+
+                //Driffta.drifftaProcessing(user, expName, reg, tile);
             }
             catch(Exception e) {
                 e.printStackTrace();
                 return e.fillInStackTrace().toString();
             }
 
-            return "Processed files uploaded at: /" + user + File.separator + expName + "/processed";
+            return "Processed files uploaded at: /" + user + "/" + expName + "/processed";
+        });
+
+        post("/makeMontage", "application/octet-stream", (request, response) -> {
+            String user = request.queryParams("user");
+            String expName = request.queryParams("exp");
+            String factor = request.queryParams("fc");
+
+            try {
+//                ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"C:\\Users\\Nikolay\\IdeaProjects\\CODEXServer_Spark_rebuild\\out\\artifacts\\CODEXServer_Spark_rebuild_jar\\CODEXServer.jar\" org.nolanlab.CODEX.driffta.MakeMontage \"" + user + "\" \"" + expName + "\" " + factor + " " + serverHomeDir);
+                ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"CODEXServer.jar\" org.nolanlab.CODEX.driffta.MakeMontage \"" + user + "\" \"" + expName + "\" " + factor + " " + serverHomeDir);
+                pb.redirectErrorStream(true);
+
+                log("Starting Make montage in a new process: " + pb.command().toString());
+                Process proc = pb.start();
+
+                expHelper.waitAndPrint(proc);
+                log("Make montage process done");
+
+                //MakeMontage.createMontages(user, expName, factor);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return e.fillInStackTrace().toString();
+            }
+
+            return "Montages created at: /" + user + "/" + expName + "/processed/stitched";
         });
 
 
@@ -134,51 +152,64 @@ public class RscCodexController {
             boolean showImage = false;
             boolean use_membrane = false;
 
-            SegConfigParam segParam = new SegConfigParam();
+//            SegConfigParam segParam = new SegConfigParam();
+            String[] segArgs = new String[17];
 
-            String serverConfig = RscCodexController.getServerHomeDir();
-            File rootDir = new File(getDataHomeDir()  + File.separator + user + File.separator + exp + File.separator + "processed");
+            segArgs[0] = segmName;
+            segArgs[1] = getDataHomeDir()  + File.separator + user + File.separator + exp + File.separator + "processed";
+            segArgs[2] = String.valueOf(showImage);
+            segArgs[3] = radius;
+            segArgs[4] = String.valueOf(use_membrane);
+            segArgs[5] = maxCutOff;
+            segArgs[6] = minCutOff;
+            segArgs[7] = relativeCutOff;
+            segArgs[8] = nucStainChannel;
+            segArgs[9] = nucStainCycle;
+            segArgs[10] = membStainChannel;
+            segArgs[11] = membStainCycle;
+            segArgs[12] = String.valueOf(1.0);
+            segArgs[13] = String.valueOf(false);
+            segArgs[14] = String.valueOf(false);
+            segArgs[15] = String.valueOf(0);
+            segArgs[16] = String.valueOf(false);
 
-            segParam.setSegmName(segmName);
-            segParam.setRootDir(rootDir);
-            segParam.setShowImage(showImage);
-            segParam.setRadius(Integer.parseInt(radius));
-            segParam.setUse_membrane(use_membrane);
-            segParam.setMaxCutoff(Double.parseDouble(maxCutOff));
-            segParam.setMinCutoff(Double.parseDouble(minCutOff));
-            segParam.setRelativeCutoff(Double.parseDouble(relativeCutOff));
-            segParam.setNuclearStainChannel(Integer.parseInt(nucStainChannel));
-            segParam.setNuclearStainCycle(Integer.parseInt(nucStainCycle));
-            segParam.setMembraneStainChannel(Integer.parseInt(membStainChannel));
-            segParam.setMembraneStainCycle(Integer.parseInt(membStainCycle));
-            segParam.setInner_ring_size(1.0);
-            segParam.setCount_puncta(false);
-            segParam.setDont_inverse_memb(false);
-            segParam.setConcentricCircles(0);
-            segParam.setDelaunay_graph(false);
-
-            logger.print("Parameters as seen from the browser: ");
-            logger.print("Input dir: " + segParam.getRootDir().getPath());
-            logger.print("showImage: "+ segParam.isShowImage());
-            logger.print("radius: " + segParam.getRadius());
-            logger.print("use_Membrane: " + segParam.isUse_membrane());
-            logger.print("maxCutOff: " + segParam.getMaxCutoff());
-            logger.print("minCutOff: " + segParam.getMinCutoff());
-            logger.print("relativeCutOff: " + segParam.getRelativeCutoff());
-            logger.print("nucStainChannel: " + segParam.getNuclearStainChannel());
-            logger.print("nucStainCycle: " + segParam.getNuclearStainCycle());
-            logger.print("membStainChannel: " + segParam.getMembraneStainChannel());
-            logger.print("membStainCycle: " + segParam.getMembraneStainCycle());
-            logger.print("inner ring size: " + segParam.getInner_ring_size());
-            logger.print("count puncta: " + segParam.isCount_puncta());
-            logger.print("dont_inverse_memb: " + segParam.isDont_inverse_memb());
-            logger.print("concentric circles: " +segParam.getConcentricCircles());
-            logger.print("delaunay graph: "+ segParam.isDelaunay_graph());
+//            File rootDir = new File(getDataHomeDir()  + File.separator + user + File.separator + exp + File.separator + "processed");
+//
+//            segParam.setSegmName(segmName);
+//            segParam.setRootDir(rootDir);
+//            segParam.setShowImage(showImage);
+//            segParam.setRadius(Integer.parseInt(radius));
+//            segParam.setUse_membrane(use_membrane);
+//            segParam.setMaxCutoff(Double.parseDouble(maxCutOff));
+//            segParam.setMinCutoff(Double.parseDouble(minCutOff));
+//            segParam.setRelativeCutoff(Double.parseDouble(relativeCutOff));
+//            segParam.setNuclearStainChannel(Integer.parseInt(nucStainChannel));
+//            segParam.setNuclearStainCycle(Integer.parseInt(nucStainCycle));
+//            segParam.setMembraneStainChannel(Integer.parseInt(membStainChannel));
+//            segParam.setMembraneStainCycle(Integer.parseInt(membStainCycle));
+//            segParam.setInner_ring_size(1.0);
+//            segParam.setCount_puncta(false);
+//            segParam.setDont_inverse_memb(false);
+//            segParam.setConcentricCircles(0);
+//            segParam.setDelaunay_graph(false);
 
             logger.print("Starting Main Segmentation...");
 
             try {
-                rs.runSeg(segParam);
+
+//                ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"C:\\Users\\Nikolay\\IdeaProjects\\CODEXServer_Spark_rebuild\\out\\artifacts\\CODEXServer_Spark_rebuild_jar\\CODEXServer.jar\" org.nolanlab.CODEX.segm.segmserver.RunSegm "
+                ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"CODEXServer.jar\" org.nolanlab.CODEX.segm.segmserver.RunSegm "
+                        + segArgs[0] + " " + segArgs[1] + " " + segArgs[2] + " " + segArgs[3] + " " + segArgs[4] + " " + segArgs[5] + " " + segArgs[6] + " " + segArgs[6] + " " + segArgs[8] + " "
+                        + segArgs[9] + " " + segArgs[10] + " " + segArgs[11] + " " + segArgs[12] + " " + segArgs[13] + " " + segArgs[14] + " " + segArgs[15] + " " + segArgs[16]);
+                pb.redirectErrorStream(true);
+
+                log("Starting segmentation in a new process: " + pb.command().toString());
+                Process proc = pb.start();
+
+                expHelper.waitAndPrint(proc);
+                log("Segmentation process done");
+
+                //rs.runSeg(segParam);
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -188,7 +219,17 @@ public class RscCodexController {
 
             logger.print("Starting Concatenate results");
             try {
-                ConcatenateResults.callConcatenateResults(new File(segParam.getRootDir() + File.separator +"segm" + File.separator + segmName));
+//                ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"C:\\Users\\Nikolay\\IdeaProjects\\CODEXServer_Spark_rebuild\\out\\artifacts\\CODEXServer_Spark_rebuild_jar\\CODEXServer.jar\" org.nolanlab.CODEX.segm.segmserver.ConcatenateResults " + "\"" + segArgs[1] + File.separator +"segm" + File.separator + segArgs[0] + "\"");
+                ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"CODEXServer.jar\" org.nolanlab.CODEX.segm.segmserver.ConcatenateResults " + "\"" + segArgs[1] + File.separator +"segm" + File.separator + segArgs[0] + "\"");
+                pb.redirectErrorStream(true);
+
+                log("Starting ConcatenateResults in a new process: " + pb.command().toString());
+                Process proc = pb.start();
+
+                expHelper.waitAndPrint(proc);
+                log("ConcatenateResults process done");
+
+                //ConcatenateResults.callConcatenateResults(new File(segParam.getRootDir() + File.separator +"segm" + File.separator + segmName));
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -197,14 +238,25 @@ public class RscCodexController {
             logger.print("ConcatenateResults done");
 
             try {
-                MakeFCS.callMakeFcs(segParam);
+//                ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"C:\\Users\\Nikolay\\IdeaProjects\\CODEXServer_Spark_rebuild\\out\\artifacts\\CODEXServer_Spark_rebuild_jar\\CODEXServer.jar\" org.nolanlab.CODEX.segm.segmserver.MakeFCS "
+                ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"CODEXServer.jar\" org.nolanlab.CODEX.segm.segmserver.MakeFCS "
+                        + segArgs[0] + " " + segArgs[1] + " " + segArgs[2] + " " + segArgs[3] + " " + segArgs[4] + " " + segArgs[5] + " " + segArgs[6] + " " + segArgs[7] + " " + segArgs[8] + " "
+                        + segArgs[9] + " " + segArgs[10] + " " + segArgs[11] + " " + segArgs[12] + " " + segArgs[13] + " " + segArgs[14] + " " + segArgs[15] + " " + segArgs[16] + " " + serverHomeDir);
+                pb.redirectErrorStream(true);
+
+                log("Starting MakeFCS in a new process: " + pb.command().toString());
+                Process proc = pb.start();
+
+                expHelper.waitAndPrint(proc);
+                log("MakeFCS process done");
+                //MakeFCS.callMakeFcs(segParam);
             }
             catch (Exception e) {
                 e.printStackTrace();
                 return e.fillInStackTrace().toString();
             }
 
-            File checkOut = new File(segParam.getRootDir() + File.separator + "segm" + File.separator + segmName + File.separator + "FCS");
+            File checkOut = new File(segArgs[1] + File.separator + "segm" + File.separator + segmName + File.separator + "FCS");
             for(File compUncomp : checkOut.listFiles()) {
                 if(compUncomp.isDirectory()) {
                     File[] txtFiles = compUncomp.listFiles(t -> t.getName().endsWith(".txt"));
@@ -382,33 +434,62 @@ public class RscCodexController {
             String rescaleSeparately = request.queryParams("rescaleSeparately");
             String clusteringName = request.queryParams("clusteringName");
 
+            String[] clusterArgs = new String[11];
 
-            ClusteringConfigParam clusteringConfigParam = new ClusteringConfigParam();
-
-            File clusteringDir = new File(getDataHomeDir() + File.separator + user + File.separator + exp
+            clusterArgs[0] = clusteringName;
+            clusterArgs[1] = getDataHomeDir() + File.separator + user + File.separator + exp
                     + File.separator + "processed" + File.separator + "segm" + File.separator + tstamp + File.separator
-                    + "FCS" + File.separator + fcs + File.separator + clusteringName);
+                    + "FCS" + File.separator + fcs + File.separator + clusteringName;
+            clusterArgs[2] = parentGate;
+            clusterArgs[3] = clustCols;
+            clusterArgs[4] = limitEvents;
+            clusterArgs[5] = transformation;
+            clusterArgs[6] = scalingFactor;
+            clusterArgs[7] = noiseThreshold;
+            clusterArgs[8] = rescale;
+            clusterArgs[9] = quantile;
+            clusterArgs[10] = rescaleSeparately;
 
-            if(!clusteringDir.exists()) {
-                clusteringDir.mkdir();
-            }
 
-            clusteringConfigParam.setClusteringDir(clusteringDir);
-            clusteringConfigParam.setClusteringName(clusteringName);
-            clusteringConfigParam.setGateName(parentGate);
-            clusteringConfigParam.setClustCols(clustCols);
-            clusteringConfigParam.setLimitEvents(Integer.parseInt(limitEvents));
-            clusteringConfigParam.setTransformation(transformation);
-            clusteringConfigParam.setScalingFactor(Integer.parseInt(scalingFactor));
-            clusteringConfigParam.setNoiseThreshold(Double.parseDouble(noiseThreshold));
-            clusteringConfigParam.setRescale(rescale);
-            clusteringConfigParam.setQuantile(Double.parseDouble(quantile));
-            clusteringConfigParam.setRescaleSeparately(Boolean.parseBoolean(rescaleSeparately));
+//            ClusteringConfigParam clusteringConfigParam = new ClusteringConfigParam();
+//
+//            File clusteringDir = new File(getDataHomeDir() + File.separator + user + File.separator + exp
+//                    + File.separator + "processed" + File.separator + "segm" + File.separator + tstamp + File.separator
+//                    + "FCS" + File.separator + fcs + File.separator + clusteringName);
+//
+//            if(!clusteringDir.exists()) {
+//                clusteringDir.mkdir();
+//            }
+//
+//            clusteringConfigParam.setClusteringDir(clusteringDir);
+//            clusteringConfigParam.setClusteringName(clusteringName);
+//            clusteringConfigParam.setGateName(parentGate);
+//            clusteringConfigParam.setClustCols(clustCols);
+//            clusteringConfigParam.setLimitEvents(Integer.parseInt(limitEvents));
+//            clusteringConfigParam.setTransformation(transformation);
+//            clusteringConfigParam.setScalingFactor(Integer.parseInt(scalingFactor));
+//            clusteringConfigParam.setNoiseThreshold(Double.parseDouble(noiseThreshold));
+//            clusteringConfigParam.setRescale(rescale);
+//            clusteringConfigParam.setQuantile(Double.parseDouble(quantile));
+//            clusteringConfigParam.setRescaleSeparately(Boolean.parseBoolean(rescaleSeparately));
 
-            logger.print("Starting Clustering...");
+            logger.print("Starting main Clustering...");
 
             try {
-                rc.runClustering(clusteringConfigParam);
+
+                //ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"C:\\Users\\Nikolay\\IdeaProjects\\CODEXServer_Spark_rebuild\\out\\artifacts\\CODEXServer_Spark_rebuild_jar\\CODEXServer.jar\" org.nolanlab.CODEX.clustering.clsserver.RunClustering "
+                ProcessBuilder pb = new ProcessBuilder("cmd", "/C", "java -Xms5G -Xmx48G -Xmn50m -cp \"CODEXServer.jar\" org.nolanlab.CODEX.clustering.clsserver.RunClustering "
+                        + clusterArgs[0] + " " + clusterArgs[1] + " " + clusterArgs[2] + " " + clusterArgs[3] + " " + clusterArgs[4] + " " + clusterArgs[5] + " " + clusterArgs[6] + " "
+                        + clusterArgs[7] + " " + clusterArgs[8] + " " + clusterArgs[9] + " " + clusterArgs[10] + " " + serverHomeDir);
+                pb.redirectErrorStream(true);
+
+                log("Starting clustering in a new process: " + pb.command().toString());
+                Process proc = pb.start();
+
+                expHelper.waitAndPrint(proc);
+                log("Clustering process done");
+
+                //rc.runClustering(clusteringConfigParam);
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -416,7 +497,7 @@ public class RscCodexController {
             }
             logger.print("Clustering done");
 
-            File checkOut = new File(clusteringConfigParam.getClusteringDir() + File.separator + "out");
+            File checkOut = new File(clusterArgs[1] + File.separator + "out");
 
             String res;
             if(!checkOut.exists() || !checkOut.isDirectory()) {

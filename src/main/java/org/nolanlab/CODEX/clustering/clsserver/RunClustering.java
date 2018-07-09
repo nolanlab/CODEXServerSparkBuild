@@ -19,13 +19,31 @@ import java.util.List;
 
 public class RunClustering {
 
-    private ClusteringHelper clusteringHelper = new ClusteringHelper();
-    private int totalFolder;
-    private int progress = 0;
-    private ExperimentHelper expHelper = new ExperimentHelper();
+    private static ClusteringHelper clusteringHelper = new ClusteringHelper();
+    private static ExperimentHelper expHelper = new ExperimentHelper();
 
-    public void runClustering(ClusteringConfigParam clusteringConfigParam) throws Exception {
-        File clusteringDir = clusteringConfigParam.getClusteringDir();
+    public static void main(String[] args) throws Exception {
+
+        ClusteringConfigParam clusteringConfigParam = new ClusteringConfigParam();
+
+        clusteringConfigParam.setClusteringName(args[0]);
+        File clusteringDir = new File(args[1]);
+
+        if(!clusteringDir.exists()) {
+            clusteringDir.mkdir();
+        }
+
+        clusteringConfigParam.setClusteringDir(clusteringDir);
+        clusteringConfigParam.setGateName(args[2]);
+        clusteringConfigParam.setClustCols(args[3]);
+        clusteringConfigParam.setLimitEvents(Integer.parseInt(args[4]));
+        clusteringConfigParam.setTransformation(args[5]);
+        clusteringConfigParam.setScalingFactor(Integer.parseInt(args[6]));
+        clusteringConfigParam.setNoiseThreshold(Double.parseDouble(args[7]));
+        clusteringConfigParam.setRescale(args[8]);
+        clusteringConfigParam.setQuantile(Double.parseDouble(args[9]));
+        clusteringConfigParam.setRescaleSeparately(Boolean.parseBoolean(args[10]));
+
         if (!clusteringDir.exists()) {
             throw new IllegalArgumentException("Error: Cannot find the input directoty");
         }
@@ -41,7 +59,7 @@ public class RunClustering {
         Path file = Paths.get(dir.getCanonicalPath() + File.separator + "importConfig.txt");
         Files.write(file, lines, Charset.forName("UTF-8"));
 
-        String libConfig = RscCodexController.getServerHomeDir() + File.separator + "lib";
+        String libConfig = args[11] + File.separator + "lib";
         File vortexJar = new File(libConfig + File.separator + "VorteX.jar");
 
         createFcsFileListTxt(dir, clusteringConfigParam);

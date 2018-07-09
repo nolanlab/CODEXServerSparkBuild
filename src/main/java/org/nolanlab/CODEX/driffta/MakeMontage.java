@@ -29,8 +29,6 @@ import java.util.Map;
  */
 public class MakeMontage {
 
-    private static File[] seqFiles;
-
     public static void createMontages(String dirTiles, String dirStitched, int factor) throws Exception {
         File mkMonDir = new File(dirStitched);
         File tilesDir = new File(dirTiles);
@@ -42,8 +40,11 @@ public class MakeMontage {
         runMontageAlgo(tilesDir, mkMonDir, tileVsBf, factor);
     }
 
-    public static void createMontages(String user, String expName, String fc) throws Exception {
-        String serverConfig = RscCodexController.getServerHomeDir() + File.separator + "data";
+    public static void main(String[] args) throws Exception {
+        String user = args[0];
+        String expName = args[1];
+        String fc = args[2];
+        String serverConfig = args[3] + File.separator + "data";
         String mkMonLoc = serverConfig + File.separator + user + File.separator + expName +File.separator + "processed" + File.separator + "stitched";
         int factor = Integer.parseInt(fc);
 

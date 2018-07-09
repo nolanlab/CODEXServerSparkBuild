@@ -20,7 +20,9 @@ import java.util.List;
  */
 public class ConcatenateResults {
 
-    public static void callConcatenateResults(File dir) throws Exception {
+    public static void main(String[] args) throws Exception {
+
+        File dir = new File(args[0]);
 
         File fcsDir = new File(dir + File.separator + "FCS");
         File compDir = new File(fcsDir + File.separator + "compensated");

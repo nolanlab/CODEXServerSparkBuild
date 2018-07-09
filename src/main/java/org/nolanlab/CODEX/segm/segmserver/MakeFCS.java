@@ -25,8 +25,30 @@ public class MakeFCS {
     private static File compDir;
     private static File uncompDir;
     private static ExperimentHelper expHelper = new ExperimentHelper();
+    private static String serverHome = "";
 
-    public static void callMakeFcs(SegConfigParam segParam) throws Exception {
+    public static void main(String[] args) throws Exception {
+
+        SegConfigParam segParam = new SegConfigParam();
+
+        segParam.setSegmName(args[0]);
+        segParam.setRootDir(new File(args[1]));
+        segParam.setShowImage(Boolean.parseBoolean(args[2]));
+        segParam.setRadius(Integer.parseInt(args[3]));
+        segParam.setUse_membrane(Boolean.parseBoolean(args[4]));
+        segParam.setMaxCutoff(Double.parseDouble(args[5]));
+        segParam.setMinCutoff(Double.parseDouble(args[6]));
+        segParam.setRelativeCutoff(Double.parseDouble(args[7]));
+        segParam.setNuclearStainChannel(Integer.parseInt(args[8]));
+        segParam.setNuclearStainCycle(Integer.parseInt(args[9]));
+        segParam.setMembraneStainChannel(Integer.parseInt(args[10]));
+        segParam.setMembraneStainCycle(Integer.parseInt(args[11]));
+        segParam.setInner_ring_size(Double.parseDouble(args[12]));
+        segParam.setCount_puncta(Boolean.parseBoolean(args[13]));
+        segParam.setDont_inverse_memb(Boolean.parseBoolean(args[14]));
+        segParam.setConcentricCircles(Integer.parseInt(args[15]));
+        segParam.setDelaunay_graph(Boolean.parseBoolean(args[16]));
+        serverHome = args[17];
 
         dir = new File(segParam.getRootDir() + File.separator + "segm" + File.separator + segParam.getSegmName());
         fcsDir = new File(dir + File.separator + "FCS");
@@ -144,7 +166,7 @@ public class MakeFCS {
         String s  = "-InputFile:\"" + outPath + "\"";
         System.out.println(s);
 
-        String libConfig = RscCodexController.getServerHomeDir() + File.separator + "lib";
+        String libConfig = serverHome + File.separator + "lib";
         ProcessBuilder pb = new ProcessBuilder("java", "-jar", libConfig + File.separator + "csv2fcs.jar", s);
         Process p = pb.start();
         pb.redirectErrorStream(true);

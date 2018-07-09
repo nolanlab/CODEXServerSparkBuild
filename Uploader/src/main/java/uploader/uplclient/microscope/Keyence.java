@@ -18,7 +18,7 @@ public class Keyence implements Microscope {
 
     public void guessZSlices(File dir, ExperimentView experimentView) {
         if(dir != null) {
-            for (File cyc : dir.listFiles()) {
+            outer: for (File cyc : dir.listFiles()) {
                 if (cyc != null && cyc.isDirectory() && cyc.getName().toLowerCase().startsWith("cyc")) {
                     File[] cycFiles = cyc.listFiles();
                     Arrays.sort(cycFiles, Collections.reverseOrder());
@@ -31,11 +31,9 @@ public class Keyence implements Microscope {
                                 zNumber = String.valueOf(zIndex);
                             }
                             experimentView.getVal9().setText(zNumber);
-                            break;
+                            break outer;
                         }
                     }
-                    //break outer loop
-                    break;
                 }
             }
         }
@@ -43,7 +41,7 @@ public class Keyence implements Microscope {
 
     public void guessChannelNamesAndWavelength(File dir, ExperimentView experimentView) {
         if(dir != null) {
-            for (File cyc : dir.listFiles()) {
+            outer: for (File cyc : dir.listFiles()) {
                 if (cyc != null && cyc.isDirectory() && cyc.getName().toLowerCase().startsWith("cyc")) {
                     File[] cycFiles = cyc.listFiles();
                     Arrays.sort(cycFiles, Collections.reverseOrder());
@@ -89,7 +87,7 @@ public class Keyence implements Microscope {
                     experimentView.getVal11().setText(ch);
                     experimentView.getVal21().setText(waveL);
                     //break outer loop
-                    break;
+                    break outer;
                 }
             }
         }
@@ -174,7 +172,7 @@ public class Keyence implements Microscope {
 
     public boolean isTilesAProductOfRegionXAndY(File dir, ExperimentView expView) {
         if (dir != null) {
-            for (File cyc : dir.listFiles()) {
+            outer: for (File cyc : dir.listFiles()) {
                 if (cyc != null && cyc.isDirectory() && cyc.getName().toLowerCase().startsWith("cyc")) {
                     File[] cycFiles = cyc.listFiles();
                     Arrays.sort(cycFiles, Collections.reverseOrder());
@@ -190,11 +188,9 @@ public class Keyence implements Microscope {
                                     return false;
                                 }
                             }
-                            break;
+                            break outer;
                         }
                     }
-                    //break outer loop
-                    break;
                 }
             }
         }
